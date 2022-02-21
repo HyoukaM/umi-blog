@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IConfigFromPluginsRoutes, routes } from '@/routes/routes';
 import { Menu } from 'antd';
+import { useHistory } from 'umi';
 
 const { SubMenu, Item } = Menu;
 
 const filterRouter = routes?.filter((router) => router.path === '/')[0].routes;
 
-const HeaderMenu = () => {
+const HeaderMenu: React.FC = () => {
+  const [subMenuActivePath, setSubMenuActivePath] = useState<string>('/');
+  const history = useHistory();
   if (!filterRouter || !filterRouter.length) return null;
   const renderMenu = (routes: IConfigFromPluginsRoutes) => {
     return routes.map((router) => {
@@ -21,7 +24,24 @@ const HeaderMenu = () => {
       return <Item key={router.path}>{router.title}</Item>;
     });
   };
-  return <Menu mode="horizontal">{renderMenu(filterRouter)}</Menu>;
+  const menuSelect = ({ key }: { key: string }) => {
+    history.push(key);
+    setSubMenuActivePath(key);
+  };
+
+  useEffect(() => {
+    setSubMenuActivePath(history.location.pathname);
+  }, [history.location.pathname]);
+
+  return (
+    <Menu
+      selectedKeys={[subMenuActivePath]}
+      onSelect={menuSelect}
+      mode="horizontal"
+    >
+      {renderMenu(filterRouter)}
+    </Menu>
+  );
 };
 
 export default HeaderMenu;

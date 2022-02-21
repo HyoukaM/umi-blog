@@ -7,13 +7,15 @@ export default defineConfig({
   },
   routes: routes,
   fastRefresh: {},
-  favicon: './src/assets/favicon.svg',
+  favicon: 'public/favicon.svg',
   alias: {
     '@/cloud': './src/cloudbase-api',
   },
   dva: {
     immer: true,
     hmr: true,
+    disableModelsReExport: false,
+    lazyLoad: true,
   },
   antd: {
     compact: true,

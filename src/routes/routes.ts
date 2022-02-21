@@ -10,20 +10,20 @@ export const routes: IConfigFromPluginsRoutes = [
   {
     path: '/',
     component: '@/layouts/Layouts.tsx',
-    exact: true,
+    exact: false,
     title: '首页',
     routes: [
       {
-        path: '/home',
+        path: '/',
         component: '@/pages/home/Home.tsx',
         exact: true,
         title: '首页',
       },
       {
-        path: '/test',
-        component: '@/pages/home/Home.tsx',
+        path: '/archive',
+        component: '@/pages/archive/Archive.tsx',
         exact: true,
-        title: '测试',
+        title: '归档',
       },
     ],
   },
