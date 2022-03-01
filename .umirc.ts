@@ -7,7 +7,8 @@ export default defineConfig({
   },
   routes: routes,
   fastRefresh: {},
-  favicon: 'public/favicon.svg',
+  favicon:
+    'https://cdn.jsdelivr.net/gh/HyoukaM/umi-blog/src/assets/favicon.svg',
   alias: {
     '@/cloud': './src/cloudbase-api',
   },

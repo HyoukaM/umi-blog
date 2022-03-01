@@ -1,0 +1,29 @@
+@import '../../style/global';
+.footer {
+  padding: @defaultPadding;
+  height: 80px;
+  display: flex;
+  margin: 0 20px;
+  align-items: center;
+  color: #898fa0;
+  justify-content: space-between;
+  .info {
+    font-size: 16px;
+  }
+  .links {
+    .link {
+      img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    }
+    .link:first-child {
+      img {
+        margin-left: 0;
+      }
+    }
+  }
+}

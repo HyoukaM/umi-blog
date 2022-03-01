@@ -20,8 +20,20 @@ export interface BlogInterface {
    */
   createDate?: string;
   /**
+   * 创建时间
+   */
+  updateDate?: string;
+  /**
    * icon
    */
   describeIcon?: string;
+  /**
+   * 类型
+   */
+  categories?: string;
+  /**
+   * 文本内容
+   */
+  content?: string;
   _id: string;
 }

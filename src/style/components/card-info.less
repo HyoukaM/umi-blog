@@ -1,0 +1,62 @@
+.cardInfo {
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  background: white;
+
+  .cardInfoAvatar {
+    text-align: center;
+
+    .avatarImage {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-size: 1.57em;
+      font-weight: 500;
+      color: #4c4948;
+    }
+
+    .description {
+      margin-top: -0.3rem;
+    }
+  }
+
+  .data {
+    display: flex;
+    margin: 0.7rem 0 0.2rem;
+
+    .item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      span:first-child {
+        font-size: 1em;
+      }
+
+      span:last-child {
+        font-size: 1.4em;
+        margin-top: -0.3rem;
+      }
+    }
+  }
+
+  .linkInfo {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    line-height: 2.4;
+    border-radius: 7px;
+    color: white;
+    text-align: center;
+    margin-top: 0.7rem;
+    cursor: pointer;
+    i > {
+      margin-right: 0.5rem;
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

@@ -25,6 +25,12 @@ export const routes: IConfigFromPluginsRoutes = [
         exact: true,
         title: '归档',
       },
+      {
+        path: '/article',
+        component: '@/pages/article/Article.tsx',
+        exact: true,
+        title: '文章',
+      },
     ],
   },
   {

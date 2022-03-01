@@ -7,3 +7,9 @@ declare type ReducerFC<
     dispatch: Dispatch;
   },
 > = React.FC<S & P>;
+
+declare type LinksType = Array<{
+  key: string;
+  url: string;
+  icon: string;
+}>;

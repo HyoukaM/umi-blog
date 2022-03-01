@@ -1,3 +1,5 @@
+@import '../../style/global';
+
 .layout {
   position: absolute;
   left: 0;
@@ -9,6 +11,30 @@
     height: calc(100% - 100px);
     width: 100%;
     .childrenBody {
+      max-width: @maxBoxWidth;
+      padding: @bodyPadding;
+      margin: 0 auto;
+      display: flex;
+      .content {
+        transition: margin-top 0.8s ease-in-out;
+        width: 75%;
+      }
+      .asideContent {
+        width: 25%;
+        padding-left: 15px;
+      }
     }
   }
+}
+
+.layoutImage {
+  position: fixed;
+  background-image: url('../../assets/background.webp');
+  background-position: center;
+  background-size: cover;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -9999;
 }
