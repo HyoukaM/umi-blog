@@ -17,6 +17,7 @@ const Index: ReducerFC<{
   render: RenderTypeState;
 }> = (props) => {
   const { children, dispatch, blogs, render } = props;
+  const { type } = render;
   const moveBodyCurrent = useRef<HTMLDivElement | null>();
   const history = useHistory();
   /**
@@ -46,7 +47,12 @@ const Index: ReducerFC<{
     <>
       <div className={layoutStyle.layout}>
         <Header />
-        <div className={layoutStyle.body}>
+        <div
+          style={{
+            marginTop: type === '' ? '60px' : '0',
+          }}
+          className={layoutStyle.body}
+        >
           <BodyContent type={render} />
           <div
             ref={(ref) => (moveBodyCurrent.current = ref)}

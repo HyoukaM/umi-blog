@@ -13,10 +13,10 @@ const Header: React.FC<HeaderProps> = () => {
   const gotoHome = () => {
     history.push(PUB_PATH);
   };
-  const windowMoveEvent = (e: Event) => {
+  const windowMoveEvent = () => {
     if (headerRef.current) {
       const scrollTop = document.documentElement.scrollTop;
-      if (scrollTop >= 60) {
+      if (scrollTop > 10) {
         headerRef.current.setAttribute(
           'style',
           'box-shadow: 0 10px 40px 0 rgba(50, 50, 50, 0.08); background-color: #fff',
