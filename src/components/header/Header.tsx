@@ -3,6 +3,7 @@ import headerLess from '../../style/components/header-less.less';
 import logoIcon from '@/assets/favicon.svg';
 import HeaderMenu from '@/components/menu/HeaderMenu';
 import { useHistory } from 'umi';
+import { PUB_PATH } from '@/global/database';
 
 interface HeaderProps {}
 
@@ -10,15 +11,15 @@ const Header: React.FC<HeaderProps> = () => {
   const history = useHistory();
   const headerRef = useRef<HTMLDivElement | null>(null);
   const gotoHome = () => {
-    history.push('/');
+    history.push(PUB_PATH);
   };
   const windowMoveEvent = (e: Event) => {
     if (headerRef.current) {
       const scrollTop = document.documentElement.scrollTop;
-      if (scrollTop > 100) {
+      if (scrollTop >= 60) {
         headerRef.current.setAttribute(
           'style',
-          'height: 80px; box-shadow: 0 10px 40px 0 rgba(50, 50, 50, 0.08)',
+          'box-shadow: 0 10px 40px 0 rgba(50, 50, 50, 0.08); background-color: #fff',
         );
       } else {
         headerRef.current.removeAttribute('style');

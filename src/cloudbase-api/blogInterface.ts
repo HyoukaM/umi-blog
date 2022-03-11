@@ -35,5 +35,23 @@ export interface BlogInterface {
    * 文本内容
    */
   content?: string;
+  /**
+   * 字数统计
+   */
+  contentCount?: string;
+  /**
+   * 是否为原创
+   */
+  original?: boolean;
   _id: string;
 }
+
+export interface GoodArticleType {
+  _id: string;
+  title: string;
+  link_: string;
+  backgroundImage?: string;
+  describe?: string;
+}
+
+export type BlogResponse = Array<BlogInterface>;

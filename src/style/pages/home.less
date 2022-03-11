@@ -1,21 +1,42 @@
 .home {
-  display: flex;
+  display: flow-root;
   flex-direction: column;
   justify-content: center;
 
   .card {
+    height: 12.999875rem;
     display: flex;
     background-color: white;
-    box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
-    transition: all 0.5s;
+    box-shadow: 0 5px 12px -5px rgba(102, 68, 68, 0);
+    transition: all 0.3s ease 0s;
     cursor: pointer;
     position: relative;
     border-radius: 12px;
-    height: 20em;
-    top: 0;
+    overflow: hidden;
+    border: 1px solid #e3e8f7;
+    margin-top: 0.625rem;
+    margin-bottom: 1.25rem;
 
     &:hover {
-      box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
+      box-shadow: 0 8px 12px -3px #4259ef23;
+      border: 1px solid #425aef;
+
+      .title {
+        top: 20px !important;
+        color: #425aef;
+
+        .markedContext {
+          opacity: 1 !important;
+        }
+      }
+
+      .portrait {
+        transform: scale(1.1);
+      }
+
+      .articleInfo {
+        bottom: 20px !important;
+      }
     }
 
     .cardAuthorContent {
@@ -23,42 +44,82 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 40px;
+      position: relative;
 
       .title {
-        font-size: 2em;
-        line-height: 1.4;
+        position: absolute;
+        top: 40px;
+        padding: 0 40px;
+        width: 100%;
+        transition: 0.3s;
+
+        .titleSpan {
+          font-size: 1.4rem;
+          line-height: 1.4;
+          font-weight: 700;
+        }
+
+        .markedContext {
+          transition: 0.3s;
+          opacity: 0;
+          margin-top: 0.625rem;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          display: -webkit-box;
+          overflow: hidden;
+          color: rgba(60, 60, 67, 0.6);
+        }
       }
 
       .articleInfo {
+        bottom: 30px;
+        position: absolute;
         font-size: 90%;
-        color: #858585;
+        color: #363636;
+        padding: 0 40px;
+        transition: all 0.3s;
 
         .separator {
           margin: 0 8px;
-        }
-
-        .articleInfoTitle {
-          padding-right: 0.2em;
         }
 
         i {
           margin: 0 0.2rem 0 0;
         }
       }
-
-      .markedContext {
-        margin-top: 0.3rem;
-        -webkit-line-clamp: 3;
-        display: -webkit-box;
-        overflow: hidden;
-        max-height: 80px;
-      }
     }
 
     .cardAuthorPortrait {
       width: 45%;
       overflow: hidden;
+      position: relative;
+      .categoriesLeft,
+      .categoriesRight {
+        position: absolute;
+        padding: 2px 6px;
+        border-radius: 8px;
+        background: white;
+        color: black;
+        font-weight: 700;
+        font-size: 0.75rem;
+        z-index: 1;
+        transition: all 0.3s;
+
+        &:hover {
+          color: white;
+          background: #425aef;
+        }
+      }
+
+      .categoriesLeft {
+        left: 8px;
+        top: 8px;
+      }
+
+      .categoriesRight {
+        right: 8px;
+        top: 8px;
+      }
 
       .portrait {
         width: 100%;
@@ -71,10 +132,6 @@
         }
       }
     }
-  }
-
-  .card:not(:first-child) {
-    margin-top: 1rem;
   }
 
   .cardRowReverse {

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'umi';
 import homeStyle from '@/style/pages/home.less';
 import LayoutContext from '@/context/layoutContext';
-import MarkedRender from '@/components/markedRender/MarkedRender';
+import { PUB_CHILD_PATH } from '@/global/database';
 
 const Home: React.FC = () => {
   const { blogs = [] } = useContext(LayoutContext);
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
    * @param _id
    */
   const previewArticle = (_id: string) => {
-    history.push(`/article?_id=${_id}`);
+    history.push(`${PUB_CHILD_PATH}/article?_id=${_id}`);
   };
 
   return (
@@ -27,7 +27,11 @@ const Home: React.FC = () => {
             onClick={() => previewArticle(blog._id)}
           >
             <div className={`${homeStyle.cardAuthorContent}`}>
-              <span className={homeStyle.title}>{blog.title}</span>
+              <span className={homeStyle.title}>
+                <div className={homeStyle.titleSpan}>{blog.title}</div>
+                <div className={homeStyle.markedContext}>{blog.content}</div>
+              </span>
+
               <div className={homeStyle.articleInfo}>
                 <span>
                   <i className="fa fa-calendar" />
@@ -43,16 +47,6 @@ const Home: React.FC = () => {
                       new Date().getMonth() + 1
                     }-${new Date().getDate()}`}
                 </span>
-                <span className={homeStyle.separator}>|</span>
-                <span>
-                  <i className="fa fa-inbox" />
-                  <span className={homeStyle.articleInfoTitle}>
-                    {blog.categories ?? '无分类'}
-                  </span>
-                </span>
-              </div>
-              <div className={homeStyle.markedContext}>
-                <MarkedRender context={blog.content} />
               </div>
             </div>
             <div className={homeStyle.cardAuthorPortrait}>
@@ -61,6 +55,15 @@ const Home: React.FC = () => {
                 src={blog.portrait ?? 'https://api.ixiaowai.cn/gqapi/gqapi.php'}
                 alt="预览图"
               />
+              <div
+                className={`${
+                  index % 2
+                    ? homeStyle.categoriesLeft
+                    : homeStyle.categoriesRight
+                }`}
+              >
+                {blog.categories ?? '无分类'}
+              </div>
             </div>
           </div>
         );

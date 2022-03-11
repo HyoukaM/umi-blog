@@ -1,0 +1,83 @@
+.goodArticle {
+  .goodArticleCard {
+    display: flex;
+    flex-wrap: wrap;
+
+    .card {
+      cursor: pointer;
+      height: 200px;
+      border-radius: 12px;
+      background: white;
+      width: calc(20% - 16px);
+      margin: 8px;
+      border: unset;
+      &:hover {
+        .backgroundImage {
+          height: 80px;
+          filter: brightness(0.3);
+        }
+        .title {
+          background: #425aef;
+          height: 120px;
+          color: white;
+          .titleImage {
+            width: 0;
+          }
+        }
+      }
+      > div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .backgroundImage {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 120px;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+        transition: all 0.3s ease;
+      }
+
+      .title {
+        height: 90px;
+        width: 100%;
+        padding: 0.5rem;
+        background: #edf0f7;
+        border-radius: 0 0 12px 12px;
+        display: flex;
+        transition: all 0.3s ease;
+        .titleImage {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background-position: center;
+          background-repeat: no-repeat;
+          margin: 2px 8px 0 0;
+          transition: all 0.3s ease;
+        }
+
+        .titleContent {
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          line-height: 1.4;
+          > span:first-child {
+            font-weight: 600;
+            font-size: 1rem;
+          }
+          > span:last-child {
+            opacity: 0.7;
+            line-height: 1.2;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}

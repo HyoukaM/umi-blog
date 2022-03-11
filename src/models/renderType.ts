@@ -2,12 +2,13 @@ import { Effect, ImmerReducer } from '@@/plugin-dva/connect';
 
 export enum RenderBodyTypeStateEnum {
   home = '',
-  default = 'default',
+  archive = 'archive',
   article = 'article',
+  goodArticle = 'good-article',
 }
 
 export interface RenderTypeState {
-  type: keyof typeof RenderBodyTypeStateEnum;
+  type: RenderBodyTypeStateEnum;
 }
 
 export interface RenderBodyType {
@@ -24,7 +25,7 @@ export interface RenderBodyType {
 const renderTypeModel: RenderBodyType = {
   namespace: 'render',
   state: {
-    type: RenderBodyTypeStateEnum.default,
+    type: RenderBodyTypeStateEnum.home,
   },
   effects: {
     *effectType({ store }, { put }) {

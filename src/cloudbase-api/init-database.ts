@@ -6,4 +6,6 @@ const cloudBase = cloudbase.init({
 
 const db = cloudBase.database();
 
+export const command = db.command;
+
 export default db;

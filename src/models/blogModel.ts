@@ -27,7 +27,7 @@ const blogModel: BlogModelType = {
       const result = yield call(query, 'blogs', {});
       yield put({
         type: 'saveBlogs',
-        store: result.data,
+        store: result,
       });
     },
   },

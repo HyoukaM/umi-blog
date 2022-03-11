@@ -2,6 +2,7 @@ import { defineConfig } from 'umi';
 import { routes } from './src/routes/routes';
 
 export default defineConfig({
+  publicPath: process.env.NODE_ENV === 'production' ? '/app/' : '/',
   nodeModulesTransform: {
     type: 'none',
   },
@@ -20,5 +21,8 @@ export default defineConfig({
   },
   antd: {
     compact: true,
+  },
+  history: {
+    type: 'hash',
   },
 });

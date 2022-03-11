@@ -12,10 +12,11 @@ import CardInfo from '@/components/card-info/CardInfo';
 import { RenderTypeState } from '@/models/renderType';
 import '../style/index.less';
 
-const Layouts: ReducerFC<{
+const Index: ReducerFC<{
   blogs: BlogModelState;
+  render: RenderTypeState;
 }> = (props) => {
-  const { children, dispatch, blogs } = props;
+  const { children, dispatch, blogs, render } = props;
   const moveBodyCurrent = useRef<HTMLDivElement | null>();
   const history = useHistory();
   /**
@@ -46,10 +47,10 @@ const Layouts: ReducerFC<{
       <div className={layoutStyle.layout}>
         <Header />
         <div className={layoutStyle.body}>
-          <BodyContent />
+          <BodyContent type={render} />
           <div
             ref={(ref) => (moveBodyCurrent.current = ref)}
-            className={`${layoutStyle.childrenBody} body-move`}
+            className={`${layoutStyle.childrenBody}`}
           >
             <LayoutContext.Provider value={{ blogs: blogs.blogs }}>
               <div className={layoutStyle.content}>{children}</div>
@@ -61,15 +62,14 @@ const Layouts: ReducerFC<{
           <Footer />
         </div>
       </div>
-      <div className={layoutStyle.layoutImage} />
     </>
   );
 };
 
 // @ts-ignore
 export default connect(
-  ({ blogs, type }: { blogs: BlogModelState; type: RenderTypeState }) => ({
+  ({ blogs, render }: { blogs: BlogModelState; render: RenderTypeState }) => ({
     blogs,
-    type,
+    render,
   }),
-)(Layouts);
+)(Index);

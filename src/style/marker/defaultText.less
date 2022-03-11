@@ -1,0 +1,123 @@
+.text-mixin() {
+  iframe {
+    margin: 0 0 1rem;
+  }
+
+  kbd {
+    margin: 0 3px;
+    padding: 3px 5px;
+    border: 1px solid #b4b4b4;
+    border-radius: 3px;
+    background-color: #f8f8f8;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),
+      0 2px 1px 0 rgba(255, 255, 255, 0.6) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),
+      0 2px 1px 0 rgba(255, 255, 255, 0.6) inset;
+    color: #34495e;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.9em;
+    font-family: Monaco, 'Ubuntu Mono', monospace;
+    line-height: 1em;
+  }
+
+  a {
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid #49b1f5;
+    padding: 0 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #b89858;
+      color: white;
+      box-shadow: 0 8px 12px -3px #b8985823;
+      border-radius: 4px;
+      border-bottom: transparent;
+    }
+  }
+
+  img {
+    display: block;
+    margin: 0 auto 0.8rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    font-weight: 400;
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  ol,
+  ul {
+    padding: 0;
+    counter-reset: li;
+    list-style: none;
+    margin-top: 0.5rem;
+    li {
+      padding: 0.2em 0.2em 0.2em 1.8em;
+      margin: 0.2rem 0;
+      position: relative;
+      &:hover {
+        &:before {
+          transform: rotate(360deg);
+        }
+      }
+      &:before {
+        transition: all 0.3s ease;
+        margin-top: 0.5525rem;
+        width: 1.23125rem;
+        height: 1.23125rem;
+        border-radius: 50%;
+        content: counter(li);
+        counter-increment: li;
+        text-align: center;
+        font-size: 0.85rem;
+        line-height: 1.23125rem;
+        position: absolute;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+        background: #307af6;
+        color: white;
+      }
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 1rem 0 0.7rem;
+    padding: 1rem 0;
+    :before {
+      position: absolute;
+      top: calc(50% - 0.35rem);
+      color: #f47466;
+      content: '\f0c1';
+      line-height: 1;
+      transition: all 0.2s ease-out;
+    }
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.625rem;
+    padding-top: 2.5rem;
+  }
+  h3 {
+    font-size: 1.375rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+}

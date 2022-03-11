@@ -2,7 +2,6 @@ import React from 'react';
 import cardInfo from '@/style/components/card-info.less';
 import avatarNode from '@/assets/logo.png';
 import { linkInfo } from '@/global/links';
-import footerStyle from '@/style/components/footer.less';
 
 const CardInfo = () => {
   const hrefUrl = (url: string) => {
@@ -36,15 +35,15 @@ const CardInfo = () => {
         <i className="fa fa-github" />
         关注我
       </div>
-      <div>
+      <div className={cardInfo.links}>
         {linkInfo.map((link) => {
           return (
-            <span key={link.key} className={footerStyle.link}>
-              <img
-                src={link.icon}
-                alt={link.key}
-                onClick={() => hrefUrl(link.url)}
-              />
+            <span
+              onClick={() => hrefUrl(link.url)}
+              key={link.key}
+              className={cardInfo.link}
+            >
+              <i className={link.icon} />
             </span>
           );
         })}

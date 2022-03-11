@@ -53,10 +53,34 @@
     text-align: center;
     margin-top: 0.7rem;
     cursor: pointer;
+
     i > {
       margin-right: 0.5rem;
       width: 14px;
       height: 14px;
+    }
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.3rem 0 -0.3rem;
+
+    .link:first-child {
+      > i {
+        font-size: 1.4rem;
+      }
+    }
+    .link {
+      margin: 0 0.5rem;
+      font-size: 1.4em;
+      color: #4c4948;
+      cursor: pointer;
+
+      > i {
+        font-size: 1.2rem;
+      }
     }
   }
 }
