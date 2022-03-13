@@ -5,14 +5,20 @@
   height: 60px;
   position: fixed;
   top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  left: 50%;
+  transform: translate(-50%, 0);
   z-index: 2;
   padding: 0 1.25rem;
   transition: all 0.8s;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .headerBody {
+    max-width: 1500px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
   .logo {
     flex: 1;
     display: flex;

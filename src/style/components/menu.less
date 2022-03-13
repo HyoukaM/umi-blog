@@ -1,0 +1,33 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .menuItem {
+    padding: 0.1rem 0.45rem 0.1rem 0.7rem;
+    margin: 0 0.5rem;
+    letter-spacing: 0.375rem;
+    font-weight: 700;
+    color: var(--font-color);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 12px;
+    &:hover {
+      background: #425aef;
+      color: white;
+    }
+  }
+  .menuItemActive {
+    &:before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      display: inline-block;
+      background: #39b1ee;
+      border-radius: 50%;
+    }
+  }
+}

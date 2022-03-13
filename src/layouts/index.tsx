@@ -49,7 +49,7 @@ const Index: ReducerFC<{
         <Header />
         <div
           style={{
-            marginTop: type === '' ? '60px' : '0',
+            marginTop: type === 'article' ? '0' : '60px',
           }}
           className={layoutStyle.body}
         >

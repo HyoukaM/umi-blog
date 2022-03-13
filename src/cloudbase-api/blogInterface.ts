@@ -43,6 +43,10 @@ export interface BlogInterface {
    * 是否为原创
    */
   original?: boolean;
+  /**
+   * 推荐文章
+   */
+  recommend?: boolean;
   _id: string;
 }
 
@@ -52,6 +56,7 @@ export interface GoodArticleType {
   link_: string;
   backgroundImage?: string;
   describe?: string;
+  recommend?: string;
 }
 
 export type BlogResponse = Array<BlogInterface>;

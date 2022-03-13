@@ -11,6 +11,7 @@
       width: calc(20% - 16px);
       margin: 8px;
       border: unset;
+      overflow: hidden;
       &:hover {
         .backgroundImage {
           height: 80px;
@@ -24,6 +25,9 @@
             width: 0;
           }
         }
+        .recommend {
+          left: 0;
+        }
       }
       > div {
         width: 100%;
@@ -33,7 +37,18 @@
         flex-direction: column;
         padding: 0;
       }
-
+      .recommend {
+        position: absolute;
+        top: 0;
+        left: -40px;
+        display: flex;
+        background: #425aef;
+        border-radius: 0 0 12px 0;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 2px 8px;
+        color: white;
+      }
       .backgroundImage {
         background-repeat: no-repeat;
         background-position: center;

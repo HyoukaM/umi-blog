@@ -3,6 +3,7 @@ import { IConfigFromPluginsRoutes, routes } from '@/routes/routes';
 import { Menu } from 'antd';
 import { useHistory } from 'umi';
 import { PUB_PATH } from '@/global/database';
+import menuStyle from '@/style/components/menu.less';
 
 const { SubMenu, Item } = Menu;
 
@@ -12,18 +13,29 @@ const filterRouter = routes?.filter((router) => router.path === PUB_PATH)[0]
 const HeaderMenu: React.FC = () => {
   const [subMenuActivePath, setSubMenuActivePath] = useState<string>('/');
   const history = useHistory();
-  if (!filterRouter || !filterRouter.length) return null;
+  if (!filterRouter || !filterRouter.length) {
+    return null;
+  }
   const renderMenu = (routes: Array<IConfigFromPluginsRoutes>) => {
     return routes.map((router: IConfigFromPluginsRoutes) => {
-      const icon = router.icon;
       if (router.routes && router.routes.length) {
         return (
-          <SubMenu key={router.component as string} title={router.title}>
+          <div key={router.component as string}>
             {renderMenu(router.routes)}
-          </SubMenu>
+          </div>
         );
       }
-      return <Item key={router.path}>{router.title}</Item>;
+      return (
+        <div
+          onClick={() => menuSelect({ key: router.path ?? '' })}
+          className={`${menuStyle.menuItem} ${
+            subMenuActivePath === router.path ? menuStyle.menuItemActive : ''
+          }`}
+          key={router.path}
+        >
+          {router.title}
+        </div>
+      );
     });
   };
   const menuSelect = ({ key }: { key: string }) => {
@@ -35,15 +47,7 @@ const HeaderMenu: React.FC = () => {
     setSubMenuActivePath(history.location.pathname);
   }, [history.location.pathname]);
 
-  return (
-    <Menu
-      selectedKeys={[subMenuActivePath]}
-      onSelect={menuSelect}
-      mode="horizontal"
-    >
-      {renderMenu(filterRouter)}
-    </Menu>
-  );
+  return <div className={menuStyle.menu}>{renderMenu(filterRouter)}</div>;
 };
 
 export default HeaderMenu;

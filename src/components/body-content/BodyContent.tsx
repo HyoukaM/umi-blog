@@ -42,6 +42,7 @@ const BodyContent: React.FC<BodyContentProps> = (props) => {
         return homeBodyContent();
     }
   };
+
   const articleBodyContent = () => {
     const {
       location: { search },

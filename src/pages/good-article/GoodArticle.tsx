@@ -23,6 +23,9 @@ const GoodArticle = () => {
               className={goodArticleStyle.card}
               onClick={() => window.open(goodArticle.link_)}
             >
+              {goodArticle.recommend && (
+                <span className={goodArticleStyle.recommend}>荐</span>
+              )}
               <div
                 style={{
                   backgroundImage: `url(${goodArticle.backgroundImage})`,

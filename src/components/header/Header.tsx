@@ -34,11 +34,13 @@ const Header: React.FC<HeaderProps> = () => {
   }, []);
   return (
     <div className={headerLess.header} ref={(ref) => (headerRef.current = ref)}>
-      <div className={headerLess.logo}>
-        <img src={logoIcon} alt="logo" onClick={gotoHome} />
-      </div>
-      <div className={headerLess.menu}>
-        <HeaderMenu />
+      <div className={headerLess.headerBody}>
+        <div className={headerLess.logo}>
+          <img src={logoIcon} alt="logo" onClick={gotoHome} />
+        </div>
+        <div className={headerLess.menu}>
+          <HeaderMenu />
+        </div>
       </div>
     </div>
   );
