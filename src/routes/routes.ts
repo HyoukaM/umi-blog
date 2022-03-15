@@ -5,6 +5,7 @@ import { PUB_CHILD_PATH, PUB_PATH } from '../global/database';
 export type IConfigFromPluginsRoutes = RoutesConfig & {
   icon?: string | React.ReactNode;
   title?: string | React.ReactNode;
+  notRender?: boolean;
 };
 
 export const routes: Array<IConfigFromPluginsRoutes> = [
@@ -25,6 +26,7 @@ export const routes: Array<IConfigFromPluginsRoutes> = [
         component: '@/pages/archive/Archive.tsx',
         exact: true,
         title: '归档',
+        notRender: true,
       },
       {
         path: `${PUB_CHILD_PATH}/article`,
@@ -37,6 +39,13 @@ export const routes: Array<IConfigFromPluginsRoutes> = [
         component: '@/pages/good-article/GoodArticle.tsx',
         exact: true,
         title: '好文推荐',
+      },
+      {
+        path: `${PUB_CHILD_PATH}/category`,
+        component: '@/pages/category/Category.tsx',
+        exact: true,
+        title: '分类',
+        notRender: true,
       },
     ],
   },

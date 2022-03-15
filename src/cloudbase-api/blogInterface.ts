@@ -47,6 +47,10 @@ export interface BlogInterface {
    * 推荐文章
    */
   recommend?: boolean;
+  /**
+   * 标签
+   */
+  tags: string[];
   _id: string;
 }
 
@@ -57,6 +61,11 @@ export interface GoodArticleType {
   backgroundImage?: string;
   describe?: string;
   recommend?: string;
+}
+
+export interface CategoryType {
+  title: string;
+  _id: string;
 }
 
 export type BlogResponse = Array<BlogInterface>;

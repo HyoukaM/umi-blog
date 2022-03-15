@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { IConfigFromPluginsRoutes, routes } from '@/routes/routes';
-import { Menu } from 'antd';
 import { useHistory } from 'umi';
 import { PUB_PATH } from '@/global/database';
 import menuStyle from '@/style/components/menu.less';
 
-const { SubMenu, Item } = Menu;
-
-const filterRouter = routes?.filter((router) => router.path === PUB_PATH)[0]
-  .routes;
+const filterRouter = routes
+  ?.filter((router) => router.path === PUB_PATH)[0]
+  .routes?.filter((router) => !router.notRender);
 
 const HeaderMenu: React.FC = () => {
   const [subMenuActivePath, setSubMenuActivePath] = useState<string>('/');

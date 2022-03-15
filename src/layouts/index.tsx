@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from '@/components/header/Header';
 import { connect, useHistory } from 'umi';
 import { BlogModelState } from '@/models/blogModel';
@@ -9,7 +9,7 @@ import LayoutContext from '@/context/layoutContext';
 import Footer from '@/components/footer/Footer';
 import { moveBody, scrollTop } from '@/utils/elementUtils';
 import CardInfo from '@/components/card-info/CardInfo';
-import { RenderTypeState } from '@/models/renderType';
+import { RenderBodyTypeStateEnum, RenderTypeState } from '@/models/renderType';
 import '../style/index.less';
 
 const Index: ReducerFC<{
@@ -18,21 +18,20 @@ const Index: ReducerFC<{
 }> = (props) => {
   const { children, dispatch, blogs, render } = props;
   const { type } = render;
-  const moveBodyCurrent = useRef<HTMLDivElement | null>();
+  const [renderCardInfo, setRenderCardInfo] = useState<boolean>(true);
   const history = useHistory();
+  const pathnameReg = /^\/(\w*)/g;
   /**
    * 更改当前的渲染类型
    */
   const dispatchType = () => {
     dispatch({
       type: 'render/effectType',
-      store: history.location.pathname.replace('/', ''),
+      store: pathnameReg.exec(history.location.pathname)?.['1'],
     });
   };
 
   useEffect(() => {
-    moveBodyCurrent.current?.removeAttribute('style');
-    moveBody('.body-move');
     scrollTop();
     dispatchType();
   }, [history.location.pathname]);
@@ -43,6 +42,17 @@ const Index: ReducerFC<{
     });
   }, []);
 
+  useEffect(() => {
+    if (type === RenderBodyTypeStateEnum.goodArticle) {
+      setRenderCardInfo(false);
+    }
+    if (
+      type === RenderBodyTypeStateEnum.home ||
+      type === RenderBodyTypeStateEnum.category
+    ) {
+      setRenderCardInfo(true);
+    }
+  }, [type]);
   return (
     <>
       <div className={layoutStyle.layout}>
@@ -54,15 +64,21 @@ const Index: ReducerFC<{
           className={layoutStyle.body}
         >
           <BodyContent type={render} />
-          <div
-            ref={(ref) => (moveBodyCurrent.current = ref)}
-            className={`${layoutStyle.childrenBody}`}
-          >
+          <div className={`${layoutStyle.childrenBody}`}>
             <LayoutContext.Provider value={{ blogs: blogs.blogs }}>
-              <div className={layoutStyle.content}>{children}</div>
-              <div className={layoutStyle.asideContent}>
-                <CardInfo />
+              <div
+                className={layoutStyle.content}
+                style={{
+                  width: !renderCardInfo ? '100%' : '75%',
+                }}
+              >
+                {children}
               </div>
+              {renderCardInfo && (
+                <div className={layoutStyle.asideContent}>
+                  <CardInfo />
+                </div>
+              )}
             </LayoutContext.Provider>
           </div>
           <Footer />

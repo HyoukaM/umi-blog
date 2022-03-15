@@ -34,7 +34,8 @@ const BodyContent: React.FC<BodyContentProps> = (props) => {
     switch (renderType) {
       case RenderBodyTypeStateEnum.home:
         return homeBodyContent();
-      case RenderBodyTypeStateEnum.archive:
+      case RenderBodyTypeStateEnum.goodArticle:
+      case RenderBodyTypeStateEnum.category:
         return null;
       case RenderBodyTypeStateEnum.article:
         return articleBodyContent();

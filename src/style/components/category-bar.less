@@ -1,0 +1,69 @@
+.categoryBar,
+.categoryBarNotHover {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s;
+  display: flex;
+  margin-bottom: 0.3125rem;
+
+  .categoryBarItem {
+    padding: 0 0.625rem;
+    margin: 0.3125rem;
+    transition: all 0.3s;
+    border-radius: 8px;
+    line-height: 1.625rem;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: normal;
+    flex-shrink: 0;
+
+    &:hover {
+      background: #425aef;
+      color: white;
+    }
+  }
+
+  .categoryBarItemTitle {
+    margin: 0.3125rem;
+    transition: all 0.3s;
+    border-radius: 8px;
+    line-height: 1.625rem;
+    font-weight: lighter;
+    min-width: 50px;
+  }
+
+  .categoryBarHiddenBody {
+    overflow-x: scroll;
+    white-space: normal;
+    display: flex;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .categoryBarItemActive {
+    background: #425aef;
+    color: white;
+  }
+}
+
+.categoryBar {
+  border: 1px solid #e3e8f7;
+  padding: 0.35rem 0.625rem;
+
+  > div {
+    width: 100%;
+  }
+
+  &:hover {
+    border: 1px solid #425aef;
+    box-shadow: 0 8px 12px -3px #4259ef23;
+  }
+}
+
+.categoryBarNotHover {
+  padding: 0.35rem 0.625rem 0.35rem 0;
+  margin-bottom: 1.25rem;
+}

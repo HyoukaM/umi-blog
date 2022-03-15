@@ -1,10 +1,26 @@
 import { Effect, ImmerReducer } from '@@/plugin-dva/connect';
 
 export enum RenderBodyTypeStateEnum {
+  /**
+   * 首页
+   */
   home = '',
+  /**
+   * 归档
+   */
   archive = 'archive',
+  /**
+   * 文章
+   */
   article = 'article',
-  goodArticle = 'good-article',
+  /**
+   * 好文推荐
+   */
+  goodArticle = 'good',
+  /**
+   * 分类
+   */
+  category = 'category',
 }
 
 export interface RenderTypeState {

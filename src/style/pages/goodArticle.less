@@ -1,4 +1,15 @@
 .goodArticle {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 2.5rem;
+  border: 1px solid #e3e8f7;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+  }
+
   .goodArticleCard {
     display: flex;
     flex-wrap: wrap;
@@ -8,27 +19,32 @@
       height: 200px;
       border-radius: 12px;
       background: white;
-      width: calc(20% - 16px);
+      width: calc(100% / 7 - 16px);
       margin: 8px;
       border: unset;
       overflow: hidden;
+
       &:hover {
         .backgroundImage {
           height: 80px;
           filter: brightness(0.3);
         }
+
         .title {
           background: #425aef;
           height: 120px;
           color: white;
+
           .titleImage {
             width: 0;
           }
         }
+
         .recommend {
-          left: 0;
+          left: -40px;
         }
       }
+
       > div {
         width: 100%;
         height: 100%;
@@ -37,10 +53,11 @@
         flex-direction: column;
         padding: 0;
       }
+
       .recommend {
         position: absolute;
         top: 0;
-        left: -40px;
+        left: 0;
         display: flex;
         background: #425aef;
         border-radius: 0 0 12px 0;
@@ -48,7 +65,9 @@
         transition: 0.3s;
         padding: 2px 8px;
         color: white;
+        z-index: 9;
       }
+
       .backgroundImage {
         background-repeat: no-repeat;
         background-position: center;
@@ -60,13 +79,14 @@
       }
 
       .title {
-        height: 90px;
+        height: 80px;
         width: 100%;
         padding: 0.5rem;
         background: #edf0f7;
         border-radius: 0 0 12px 12px;
         display: flex;
         transition: all 0.3s ease;
+
         .titleImage {
           width: 20px;
           height: 20px;
@@ -82,10 +102,12 @@
           justify-content: flex-start;
           flex-direction: column;
           line-height: 1.4;
+
           > span:first-child {
             font-weight: 600;
             font-size: 1rem;
           }
+
           > span:last-child {
             opacity: 0.7;
             line-height: 1.2;
