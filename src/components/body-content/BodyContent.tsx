@@ -14,17 +14,8 @@ interface BodyContentProps {
 
 const BodyContent: React.FC<BodyContentProps> = (props) => {
   const { type } = props;
-  const [title, setTitle] = useState<string>('');
   const [currentArticle, setCurrentArticle] = useState<BlogInterface>();
   const history = useHistory();
-
-  const fetchSubtitle = () => {
-    fetch('https://v1.hitokoto.cn/')
-      .then((response) => response.json())
-      .then(async (data) => {
-        await setTitle(data.hitokoto);
-      });
-  };
 
   const renderAuthorContent = () => {
     if (!type) {
@@ -33,14 +24,14 @@ const BodyContent: React.FC<BodyContentProps> = (props) => {
     const { type: renderType } = type;
     switch (renderType) {
       case RenderBodyTypeStateEnum.home:
-        return homeBodyContent();
       case RenderBodyTypeStateEnum.goodArticle:
       case RenderBodyTypeStateEnum.category:
+      case RenderBodyTypeStateEnum.links:
         return null;
       case RenderBodyTypeStateEnum.article:
         return articleBodyContent();
       default:
-        return homeBodyContent();
+        return null;
     }
   };
 
@@ -112,22 +103,6 @@ const BodyContent: React.FC<BodyContentProps> = (props) => {
       </div>
     );
   };
-  /**
-   * 首页渲染
-   */
-  const homeBodyContent = () => {
-    return (
-      <div className={bodyContentStyle.bodyContent}>
-        <div className={bodyContentStyle.content}>
-          <span className={bodyContentStyle.describe}>{title}</span>
-        </div>
-      </div>
-    );
-  };
-
-  useEffect(() => {
-    fetchSubtitle();
-  }, []);
 
   return renderAuthorContent();
 };

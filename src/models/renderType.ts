@@ -21,6 +21,10 @@ export enum RenderBodyTypeStateEnum {
    * 分类
    */
   category = 'category',
+  /**
+   * 友情链接
+   */
+  links = 'links',
 }
 
 export interface RenderTypeState {

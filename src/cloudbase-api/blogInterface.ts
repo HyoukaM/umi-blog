@@ -56,11 +56,13 @@ export interface BlogInterface {
 
 export interface GoodArticleType {
   _id: string;
-  title: string;
+  title?: string;
   link_: string;
   backgroundImage?: string;
   describe?: string;
   recommend?: string;
+  author?: string;
+  authorImage: string;
 }
 
 export interface CategoryType {

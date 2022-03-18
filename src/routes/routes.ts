@@ -41,6 +41,12 @@ export const routes: Array<IConfigFromPluginsRoutes> = [
         title: '好文推荐',
       },
       {
+        path: `${PUB_CHILD_PATH}/links`,
+        component: '@/pages/links/Links.tsx',
+        exact: true,
+        title: '友情链接',
+      },
+      {
         path: `${PUB_CHILD_PATH}/category`,
         component: '@/pages/category/Category.tsx',
         exact: true,

@@ -93,6 +93,7 @@
       width: 45%;
       overflow: hidden;
       position: relative;
+
       .categoriesLeft,
       .categoriesRight {
         position: absolute;
@@ -136,5 +137,62 @@
 
   .cardRowReverse {
     flex-direction: row-reverse;
+  }
+}
+
+.pagination {
+  :global {
+    .ant-pagination {
+      font-size: 1rem;
+      text-align: center;
+      position: relative;
+      height: 2.5rem;
+      line-height: 2.5rem;
+
+      .ant-pagination-prev,
+      .ant-pagination-next {
+        width: 5rem;
+        height: 2.5rem;
+        border-radius: 8px;
+        background: white;
+        border: 1px solid #e3e8f7;
+        position: absolute;
+        line-height: 2.5rem;
+
+        &:hover {
+          color: #425aef;
+          border: 1px solid #425aef;
+          box-shadow: 0 8px 12px -3px #4259ef23;
+        }
+      }
+
+      .ant-pagination-prev {
+        left: 0;
+      }
+
+      .ant-pagination-next {
+        right: 0;
+      }
+
+      .ant-pagination-item {
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        text-align: center;
+        border: 1px solid #e3e8f7;
+        border-radius: 8px;
+        transition: all 0.3s;
+        &-active {
+          background: #425aef;
+          a {
+            color: white;
+          }
+        }
+        &:hover {
+          border: 1px solid #425aef;
+          box-shadow: 0 8px 12px -3px #4259ef23;
+        }
+      }
+    }
   }
 }

@@ -6,11 +6,12 @@ import layoutStyle from '../style/layouts/layout.less';
 import { ReducerFC } from '@/global/global';
 import BodyContent from '@/components/body-content/BodyContent';
 import LayoutContext from '@/context/layoutContext';
-import Footer from '@/components/footer/Footer';
+import AboutMe from '@/components/footer/AboutMe';
 import { moveBody, scrollTop } from '@/utils/elementUtils';
 import CardInfo from '@/components/card-info/CardInfo';
 import { RenderBodyTypeStateEnum, RenderTypeState } from '@/models/renderType';
 import '../style/index.less';
+import FooterBar from '@/components/footer/FooterBar';
 
 const Index: ReducerFC<{
   blogs: BlogModelState;
@@ -43,7 +44,10 @@ const Index: ReducerFC<{
   }, []);
 
   useEffect(() => {
-    if (type === RenderBodyTypeStateEnum.goodArticle) {
+    if (
+      type === RenderBodyTypeStateEnum.goodArticle ||
+      type === RenderBodyTypeStateEnum.links
+    ) {
       setRenderCardInfo(false);
     }
     if (
@@ -66,14 +70,7 @@ const Index: ReducerFC<{
           <BodyContent type={render} />
           <div className={`${layoutStyle.childrenBody}`}>
             <LayoutContext.Provider value={{ blogs: blogs.blogs }}>
-              <div
-                className={layoutStyle.content}
-                style={{
-                  width: !renderCardInfo ? '100%' : '75%',
-                }}
-              >
-                {children}
-              </div>
+              <div className={layoutStyle.content}>{children}</div>
               {renderCardInfo && (
                 <div className={layoutStyle.asideContent}>
                   <CardInfo />
@@ -81,7 +78,10 @@ const Index: ReducerFC<{
               )}
             </LayoutContext.Provider>
           </div>
-          <Footer />
+          <div className={layoutStyle.footer}>
+            <AboutMe />
+            <FooterBar />
+          </div>
         </div>
       </div>
     </>

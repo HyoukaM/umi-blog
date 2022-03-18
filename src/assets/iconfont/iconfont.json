@@ -305,6 +305,13 @@
       "font_class": "juejin-",
       "unicode": "e60e",
       "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "8474261",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
     }
   ]
 }

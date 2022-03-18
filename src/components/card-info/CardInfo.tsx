@@ -1,53 +1,13 @@
 import React from 'react';
 import cardInfo from '@/style/components/card-info.less';
-import avatarNode from '@/assets/logo.png';
-import { linkInfo } from '@/global/links';
+import InfoAboutMe from '@/components/card-info/InfoAboutMe';
+import InfoCategory from '@/components/card-info/InfoCategory';
 
 const CardInfo = () => {
-  const hrefUrl = (url: string) => {
-    window.open(url);
-  };
   return (
     <div className={cardInfo.cardInfo}>
-      <div className={cardInfo.cardInfoAvatar}>
-        <img className={cardInfo.avatarImage} src={avatarNode} alt="图标" />
-        <div className={cardInfo.name}>Hyouka</div>
-        <div className={cardInfo.description}>前端小菜鸟的博客</div>
-      </div>
-      <div className={cardInfo.data}>
-        <div className={cardInfo.item}>
-          <span>文章</span>
-          <span>18</span>
-        </div>
-        <div className={cardInfo.item}>
-          <span>文章</span>
-          <span>18</span>
-        </div>
-        <div className={cardInfo.item}>
-          <span>文章</span>
-          <span>18</span>
-        </div>
-      </div>
-      <div
-        className={cardInfo.linkInfo}
-        onClick={() => window.open('https://github.com/HyoukaM')}
-      >
-        <i className="fa fa-github" />
-        关注我
-      </div>
-      <div className={cardInfo.links}>
-        {linkInfo.map((link) => {
-          return (
-            <span
-              onClick={() => hrefUrl(link.url)}
-              key={link.key}
-              className={cardInfo.link}
-            >
-              <i className={link.icon} />
-            </span>
-          );
-        })}
-      </div>
+      <InfoAboutMe />
+      <InfoCategory />
     </div>
   );
 };

@@ -1,29 +1,48 @@
-@import '../../style/global';
 .footer {
-  padding: @defaultPadding;
-  height: 80px;
+  padding-top: 2.5rem;
   display: flex;
-  margin: 0 20px;
   align-items: center;
-  color: #898fa0;
-  justify-content: space-between;
-  .info {
-    font-size: 16px;
-  }
-  .links {
-    .link {
-      img {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        cursor: pointer;
-        margin-left: 10px;
+  justify-content: center;
+
+  .link {
+    margin: 1.25rem 1.6875rem;
+    font-size: 1.625rem;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: cubic-bezier(0, 0, 0, 1.29) 0.5s;
+
+      &:hover {
+        transform: scale(1.1);
       }
     }
-    .link:first-child {
-      img {
-        margin-left: 0;
-      }
+
+    i {
+      font-size: inherit;
+      cursor: pointer;
+    }
+  }
+}
+
+.footerBar {
+  display: flex;
+  background: linear-gradient(208deg, #4584ff 0, #4584ff 11%, #ff7676 100%);
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+
+  .footerTitle {
+  }
+
+  .footerInfo {
+    > span {
+      font-size: 1rem;
+      margin-right: 1.25rem;
     }
   }
 }

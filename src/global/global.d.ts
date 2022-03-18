@@ -11,7 +11,9 @@ declare type ReducerFC<
 declare type LinksType = Array<{
   key: string;
   url: string;
-  icon: string;
+  icon?: string;
+  goHome?: boolean;
+  fontSize?: string;
 }>;
 
 declare type RoutesConfig = {

@@ -1,12 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'umi';
 import homeStyle from '@/style/pages/home.less';
 import LayoutContext from '@/context/layoutContext';
 import { PUB_CHILD_PATH } from '@/global/database';
 import CategoryBar from '@/components/category-bar/CategoryBar';
+import { Pagination } from 'antd';
+import { BlogResponse } from '@/cloudbase-api/blogInterface';
+import { scrollTop } from '@/utils/elementUtils';
 
 const Home: React.FC = () => {
   const { blogs = [] } = useContext(LayoutContext);
+  const [offsetBlogs, setOffsetBlogs] = useState<BlogResponse>([]);
+  const [offset, setOffset] = useState<number>(1);
   const history = useHistory();
   /**
    * 跳转至浏览页面
@@ -16,11 +21,30 @@ const Home: React.FC = () => {
     history.push(`${PUB_CHILD_PATH}/article?_id=${_id}`);
   };
 
+  const paginationChange = (page: number) => {
+    setOffset(page);
+  };
+
+  const splitOffsetBlogs = () => {
+    scrollTop();
+    setOffsetBlogs(
+      Object.assign([], blogs).splice((offset - 1) * 10, offset * 10),
+    );
+  };
+
+  useEffect(() => {
+    setOffsetBlogs(blogs);
+  }, [blogs]);
+
+  useEffect(() => {
+    splitOffsetBlogs();
+  }, [offset, blogs]);
+
   return (
     <>
       <CategoryBar />
       <div className={`${homeStyle.home}`}>
-        {blogs?.map((blog, index) => {
+        {offsetBlogs?.map((blog, index) => {
           return (
             <div
               className={`${homeStyle.card} ${
@@ -73,6 +97,24 @@ const Home: React.FC = () => {
             </div>
           );
         })}
+      </div>
+      <div className={homeStyle.pagination}>
+        <Pagination
+          onChange={paginationChange}
+          hideOnSinglePage={true}
+          pageSize={10}
+          current={offset}
+          total={blogs.length}
+          itemRender={(current, type, originalElement) => {
+            if (type === 'prev') {
+              return '上一页';
+            }
+            if (type === 'next') {
+              return '下一页';
+            }
+            return originalElement;
+          }}
+        />
       </div>
     </>
   );
