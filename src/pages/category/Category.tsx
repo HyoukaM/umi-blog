@@ -36,6 +36,7 @@ const Category = () => {
     <div className={categoryStyle.category}>
       <CategoryBar renderCategoryTitle={true} />
       <div className={categoryStyle.categoryBody}>
+        {!categorys.length && <div>暂无数据</div>}
         {categorys.map((category) => {
           return (
             <div key={category._id} className={categoryStyle.categoryItem}>

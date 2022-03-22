@@ -40,7 +40,7 @@ const InfoAnchor: ReducerFC<{
               .replace(/\s/g, '-')
               .replace(/\.|\+|\(|\)|\/|\?|=/g, '')}`;
           } else {
-            title = level.title;
+            title = `#${level.title}`;
           }
           return (
             <Link
