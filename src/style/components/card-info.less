@@ -103,12 +103,14 @@
   padding: 1.25rem 1.5rem;
   box-shadow: 0 5px 12px -5px rgba(102, 68, 68, 0);
   margin-top: 0.625rem;
+  max-height: calc(100vh - 120px);
+  overflow-y: scroll;
 
   :global {
     .ant-anchor-wrapper {
       margin: 0;
       padding: 0;
-
+      max-height: unset !important;
       .ant-anchor {
         padding-left: 0;
 

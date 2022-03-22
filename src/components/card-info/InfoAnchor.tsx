@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cardInfo from '@/style/components/card-info.less';
 import { connect } from 'umi';
 import { ReducerFC } from '@/global/global';
@@ -32,13 +32,19 @@ const InfoAnchor: ReducerFC<{
     <div className={cardInfo.infoAnchor}>
       <Anchor onClick={linkScroll} offsetTop={68} affix={false}>
         {levelList.map((level, index) => {
+          const titleLength = level.title.split('.').length;
+          let title = '';
+          if (titleLength > 1) {
+            title = `#${level.title.split('.')[0]}${level.title
+              .split('.')[1]
+              .replace(/\s/g, '-')
+              .replace(/\.|\+|\(|\)|\/|\?|=/g, '')}`;
+          } else {
+            title = level.title;
+          }
           return (
             <Link
-              href={`#${level.title.split('.')[0]}${level.title
-                .split('.')[1]
-                .toLowerCase()
-                .replace(/\s/g, '-')
-                .replace(/\.|\+|\(|\)|\/|\?|=/g, '')}`}
+              href={title}
               key={index}
               className={
                 level.level === 1
