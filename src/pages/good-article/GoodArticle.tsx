@@ -3,12 +3,13 @@ import { GoodArticleType } from '@/cloudbase-api/blogInterface';
 import { queryApi } from '@/cloudbase-api';
 import { RenderBodyTypeStateEnum } from '@/models/renderType';
 import CardItem from '@/components/card-item/CardItem';
+import { GOOD_ARTICLE } from '@/global/database';
 
 const GoodArticle = () => {
   const [goodArticles, setGoodArticles] = useState<GoodArticleType[]>([]);
   const getGoodArticles = () => {
     try {
-      queryApi<GoodArticleType[]>('goodArticle', {}).then((res) => {
+      queryApi<GoodArticleType[]>(GOOD_ARTICLE, {}).then((res) => {
         setGoodArticles(res);
       });
     } catch (e) {

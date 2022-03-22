@@ -4,16 +4,19 @@ import { BlogInterface } from '@/cloudbase-api/blogInterface';
 
 export interface BlogModelState {
   blogs: Array<BlogInterface>;
+  currentContent: string;
 }
 
 export interface BlogModelType {
   namespace: 'blogs';
   state: BlogModelState;
   effects: {
-    getBlogs: Effect;
+    effectBlogs: Effect;
+    effectContent: Effect;
   };
   reducers: {
-    saveBlogs: ImmerReducer<BlogModelState>;
+    reducerBlogs: ImmerReducer<BlogModelState>;
+    reducerContent: ImmerReducer<BlogModelState>;
   };
 }
 
@@ -21,21 +24,34 @@ const blogModel: BlogModelType = {
   namespace: 'blogs',
   state: {
     blogs: [],
+    currentContent: '',
   },
   effects: {
-    *getBlogs({ store }, { put, call }) {
+    *effectBlogs({ store }, { put, call }) {
       const result = yield call(query, 'blogs', {});
       yield put({
-        type: 'saveBlogs',
+        type: 'reducerBlogs',
         store: result,
+      });
+    },
+    *effectContent({ store }, { put }) {
+      yield put({
+        type: 'reducerContent',
+        store,
       });
     },
   },
   reducers: {
-    saveBlogs(state, { store }) {
+    reducerBlogs(state, { store }) {
       return {
         ...state,
         blogs: store,
+      };
+    },
+    reducerContent(state, { store }) {
+      return {
+        ...state,
+        currentContent: store,
       };
     },
   },

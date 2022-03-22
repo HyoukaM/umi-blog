@@ -5,6 +5,7 @@ import { useHistory } from 'umi';
 import { BlogResponse, CategoryType } from '@/cloudbase-api/blogInterface';
 import query from '@/cloudbase-api/query';
 import { getQueryId } from '@/utils/reg';
+import { BLOG_DATABASE, CATEGORY } from '@/global/database';
 
 const Category = () => {
   const [categorys, setCategorys] = useState<BlogResponse>([]);
@@ -15,11 +16,11 @@ const Category = () => {
       location: { search },
     } = history;
     const id = getQueryId(search);
-    query<CategoryType[]>('categories', {
+    query<CategoryType[]>(CATEGORY, {
       _id: id,
     }).then((res) => {
       const [first] = res;
-      query<BlogResponse>('blogs', {
+      query<BlogResponse>(BLOG_DATABASE, {
         categories: first.title,
       }).then((res) => {
         setCategorys(res);

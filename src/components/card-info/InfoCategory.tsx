@@ -8,13 +8,16 @@ const InfoCategory = () => {
   /**
    * 获取全部标签
    */
-  const getCategory = () => {
+  let getCategory = () => {
     query('categories', {}).then((res) => {
       setCategory(res);
     });
   };
   useEffect(() => {
     getCategory();
+    return () => {
+      getCategory = () => void 0;
+    };
   }, []);
   return (
     <div className={cardInfo.infoCategory}>

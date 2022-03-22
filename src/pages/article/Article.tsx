@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import LayoutContext from '@/context/layoutContext';
-import { useHistory } from 'umi';
+import { useHistory, connect } from 'umi';
 import MarkedRender from '@/components/markedRender/MarkedRender';
 import { BlogInterface } from '@/cloudbase-api/blogInterface';
 import query from '@/cloudbase-api/query';
@@ -8,8 +8,10 @@ import articleStyle from '@/style/pages/article.less';
 import { BLOG_DATABASE, PUB_PATH } from '@/global/database';
 import { command } from '@/cloudbase-api/init-database';
 import { getQueryId } from '@/utils/reg';
+import { ReducerFC } from '@/global/global';
 
-const Article: React.FC = () => {
+const Article: ReducerFC = (props) => {
+  const { dispatch } = props;
   const history = useHistory();
   const { blogs } = useContext(LayoutContext);
   const [activeId, setActiveId] = useState<string>('');
@@ -54,6 +56,13 @@ const Article: React.FC = () => {
     });
   }, [activeId]);
 
+  useEffect(() => {
+    dispatch({
+      store: article?.content,
+      type: 'blogs/effectContent',
+    });
+  }, [article]);
+
   return (
     <div className={articleStyle.article}>
       <MarkedRender context={article?.content} />
@@ -61,4 +70,4 @@ const Article: React.FC = () => {
   );
 };
 
-export default Article;
+export default connect()(Article);

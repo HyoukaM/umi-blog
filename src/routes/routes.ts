@@ -22,13 +22,6 @@ export const routes: Array<IConfigFromPluginsRoutes> = [
         title: '首页',
       },
       {
-        path: `${PUB_CHILD_PATH}/archive`,
-        component: '@/pages/archive/Archive.tsx',
-        exact: true,
-        title: '归档',
-        notRender: true,
-      },
-      {
         path: `${PUB_CHILD_PATH}/article`,
         component: '@/pages/article/Article.tsx',
         exact: true,

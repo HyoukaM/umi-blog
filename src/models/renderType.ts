@@ -6,10 +6,6 @@ export enum RenderBodyTypeStateEnum {
    */
   home = '',
   /**
-   * 归档
-   */
-  archive = 'archive',
-  /**
    * 文章
    */
   article = 'article',
@@ -28,7 +24,7 @@ export enum RenderBodyTypeStateEnum {
 }
 
 export interface RenderTypeState {
-  type: RenderBodyTypeStateEnum;
+  type?: RenderBodyTypeStateEnum;
 }
 
 export interface RenderBodyType {
@@ -45,7 +41,7 @@ export interface RenderBodyType {
 const renderTypeModel: RenderBodyType = {
   namespace: 'render',
   state: {
-    type: RenderBodyTypeStateEnum.home,
+    type: undefined,
   },
   effects: {
     *effectType({ store }, { put }) {

@@ -39,7 +39,7 @@ const Index: ReducerFC<{
 
   useEffect(() => {
     dispatch({
-      type: 'blogs/getBlogs',
+      type: 'blogs/effectBlogs',
     });
   }, []);
 
@@ -69,7 +69,7 @@ const Index: ReducerFC<{
         >
           <BodyContent type={render} />
           <div className={`${layoutStyle.childrenBody}`}>
-            <LayoutContext.Provider value={{ blogs: blogs.blogs }}>
+            <LayoutContext.Provider value={{ blogs: blogs.blogs, type }}>
               <div className={layoutStyle.content}>{children}</div>
               {renderCardInfo && (
                 <div className={layoutStyle.asideContent}>
