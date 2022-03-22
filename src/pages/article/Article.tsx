@@ -63,9 +63,28 @@ const Article: ReducerFC = (props) => {
     });
   }, [article]);
 
+  if (!article) {
+    return null;
+  }
+
   return (
     <div className={articleStyle.article}>
       <MarkedRender context={article?.content} />
+      <div className={articleStyle.footer}>
+        <div className={articleStyle.footerTitle}>
+          <span className={articleStyle.original}>
+            {article.original ? '原创' : '转载'}
+          </span>
+          <span>{article.title}</span>
+        </div>
+        <div className={articleStyle.href}>
+          <a href={window.location.href}>{`${window.location.href}`}</a>
+        </div>
+        <div className={articleStyle.author}>
+          本文是{article.original ? '原创' : '转载'}文章，采用 CC BY-NC-ND 4.0
+          协议，完整转载请注明来自 {article.author}
+        </div>
+      </div>
     </div>
   );
 };
