@@ -3,7 +3,7 @@ import cardInfo from '@/style/components/card-info.less';
 import { connect } from 'umi';
 import { ReducerFC } from '@/global/global';
 import { BlogModelState } from '@/models/blogModel';
-import { levelAnchor } from '@/utils/reg';
+import { renderMarker } from '@/utils/reg';
 import { Anchor } from 'antd';
 
 const { Link } = Anchor;
@@ -14,10 +14,28 @@ const InfoAnchor: ReducerFC<{
   const { blogs } = props;
   const { currentContent } = blogs;
   const [levelList, setLevelList] = useState<
-    { level: number; title: string }[]
+    { level: number; title: string; id: string }[]
   >([]);
   useEffect(() => {
-    setLevelList(levelAnchor(currentContent));
+    setLevelList((levelList) => {
+      const toc = levelList;
+      renderMarker.heading = (text, level, raw, slugger) => {
+        if (renderMarker.options.headerIds) {
+          const id = renderMarker.options.headerPrefix + slugger.slug(raw);
+          toc.push({
+            level,
+            title: raw,
+            id,
+          });
+          return (
+            '<h' + level + ' id="' + id + '">' + text + '</h' + level + '>\n'
+          );
+        }
+        // ignore IDs
+        return '<h' + level + '>' + text + '</h' + level + '>\n';
+      };
+      return toc;
+    });
   }, [currentContent]);
 
   const linkScroll = (e: React.MouseEvent) => {
@@ -32,19 +50,9 @@ const InfoAnchor: ReducerFC<{
     <div className={cardInfo.infoAnchor}>
       <Anchor onClick={linkScroll} offsetTop={68} affix={false}>
         {levelList.map((level, index) => {
-          const titleLength = level.title.split('.').length;
-          let title = '';
-          if (titleLength > 1) {
-            title = `#${level.title.split('.')[0]}${level.title
-              .split('.')[1]
-              .replace(/\s/g, '-')
-              .replace(/\.|\+|\(|\)|\/|\?|=/g, '')}`;
-          } else {
-            title = `#${level.title}`;
-          }
           return (
             <Link
-              href={title}
+              href={`#${level.id}`}
               key={index}
               className={
                 level.level === 1
