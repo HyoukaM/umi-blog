@@ -12,6 +12,8 @@ import CardInfo from '@/components/card-info/CardInfo';
 import { RenderBodyTypeStateEnum, RenderTypeState } from '@/models/renderType';
 import '../style/index.less';
 import FooterBar from '@/components/footer/FooterBar';
+import query from '@/cloudbase-api/query';
+import { CATEGORY, GOOD_ARTICLE, LINKS } from '@/global/database';
 
 const Index: ReducerFC<{
   blogs: BlogModelState;
@@ -31,6 +33,32 @@ const Index: ReducerFC<{
       store: pathnameReg.exec(history.location.pathname)?.['1'],
     });
   };
+  /**
+   * dispatch
+   */
+  const effectDispatch = () => {
+    dispatch({
+      type: 'blogs/effectBlogs',
+    });
+    query(CATEGORY, {}).then((res) => {
+      dispatch({
+        type: 'blogs/effectCategory',
+        store: res,
+      });
+    });
+    query(GOOD_ARTICLE, {}).then((res) => {
+      dispatch({
+        type: 'blogs/effectGoodArticles',
+        store: res,
+      });
+    });
+    query(LINKS, {}).then((res) => {
+      dispatch({
+        type: 'blogs/effectLinks',
+        store: res,
+      });
+    });
+  };
 
   useEffect(() => {
     scrollTop();
@@ -38,9 +66,7 @@ const Index: ReducerFC<{
   }, [history.location.pathname]);
 
   useEffect(() => {
-    dispatch({
-      type: 'blogs/effectBlogs',
-    });
+    effectDispatch();
   }, []);
 
   useEffect(() => {
@@ -57,6 +83,7 @@ const Index: ReducerFC<{
       setRenderCardInfo(true);
     }
   }, [type]);
+
   return (
     <>
       <div className={layoutStyle.layout}>
@@ -67,17 +94,26 @@ const Index: ReducerFC<{
           }}
           className={layoutStyle.body}
         >
-          <BodyContent type={render} />
-          <div className={`${layoutStyle.childrenBody}`}>
-            <LayoutContext.Provider value={{ blogs: blogs.blogs, type }}>
+          <LayoutContext.Provider
+            value={{
+              blogs: blogs.blogs,
+              type,
+              categorys: blogs.categorys,
+              articles: blogs.articles,
+              links: blogs.links,
+            }}
+          >
+            <BodyContent type={render} />
+            <div className={`${layoutStyle.childrenBody}`}>
               <div className={layoutStyle.content}>{children}</div>
               {renderCardInfo && (
                 <div className={layoutStyle.asideContent}>
                   <CardInfo />
                 </div>
               )}
-            </LayoutContext.Provider>
-          </div>
+            </div>
+          </LayoutContext.Provider>
+
           <div className={layoutStyle.footer}>
             <AboutMe />
             <FooterBar />

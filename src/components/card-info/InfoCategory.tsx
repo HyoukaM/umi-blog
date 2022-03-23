@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cardInfo from '@/style/components/card-info.less';
-import query from '@/cloudbase-api/query';
 import { CategoryType } from '@/cloudbase-api/blogInterface';
+import LayoutContext from '@/context/layoutContext';
 
 const InfoCategory = () => {
   const [category, setCategory] = useState<CategoryType[]>([]);
+  const { categorys } = useContext(LayoutContext);
   /**
    * 获取全部标签
    */
   let getCategory = () => {
-    query('categories', {}).then((res) => {
-      setCategory(res);
-    });
+    setCategory(categorys);
   };
   useEffect(() => {
     getCategory();
-    return () => {
-      getCategory = () => void 0;
-    };
-  }, []);
+  }, [categorys]);
   return (
     <div className={cardInfo.infoCategory}>
       <div className={cardInfo.infoCategoryList}>

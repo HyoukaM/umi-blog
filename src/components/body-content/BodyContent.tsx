@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import bodyContentStyle from '../../style/components/body-content.less';
 import { RenderBodyTypeStateEnum, RenderTypeState } from '@/models/renderType';
 import { useHistory } from 'umi';
@@ -7,6 +7,8 @@ import { BLOG_DATABASE } from '@/global/database';
 import { command } from '@/cloudbase-api/init-database';
 import { getQueryId } from '@/utils/reg';
 import { BlogInterface } from '@/cloudbase-api/blogInterface';
+import LayoutContext from '@/context/layoutContext';
+import { filterArticle } from '@/utils';
 
 interface BodyContentProps {
   type?: RenderTypeState;
@@ -14,19 +16,17 @@ interface BodyContentProps {
 
 const ArticleBodyContent = () => {
   const [currentArticle, setCurrentArticle] = useState<BlogInterface>();
+  const { blogs } = useContext(LayoutContext);
   const history = useHistory();
   const {
     location: { search },
   } = history;
   useEffect(() => {
-    query(BLOG_DATABASE, {
-      _id: command.eq(getQueryId(search)),
-    }).then((res) => {
-      if (res.length) {
-        setCurrentArticle(res[0]);
-      }
-    });
-  }, []);
+    console.log(filterArticle(blogs, getQueryId(search)));
+    console.log(getQueryId(search));
+    console.log(blogs);
+    setCurrentArticle(filterArticle(blogs, getQueryId(search)));
+  }, [blogs]);
 
   if (!currentArticle) {
     return null;
@@ -42,6 +42,7 @@ const ArticleBodyContent = () => {
     createDate,
     updateDate,
   } = currentArticle;
+  console.log(currentArticle);
   return (
     <div
       className={bodyContentStyle.articleContent}

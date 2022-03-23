@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import categoryStyle from '@/style/pages/category.less';
 import CategoryBar from '@/components/category-bar/CategoryBar';
 import { useHistory } from 'umi';
-import { BlogResponse, CategoryType } from '@/cloudbase-api/blogInterface';
-import query from '@/cloudbase-api/query';
+import { BlogResponse } from '@/cloudbase-api/blogInterface';
 import { getQueryId } from '@/utils/reg';
-import { BLOG_DATABASE, CATEGORY } from '@/global/database';
+import LayoutContext from '@/context/layoutContext';
 
 const Category = () => {
   const [categorys, setCategorys] = useState<BlogResponse>([]);
   const history = useHistory();
+  const { categorys: connetCategorys, blogs } = useContext(LayoutContext);
 
   const queryCategorys = () => {
     const {
       location: { search },
     } = history;
     const id = getQueryId(search);
-    query<CategoryType[]>(CATEGORY, {
-      _id: id,
-    }).then((res) => {
-      const [first] = res;
-      query<BlogResponse>(BLOG_DATABASE, {
-        categories: first.title,
-      }).then((res) => {
-        setCategorys(res);
-      });
-    });
+    const filterCategory = connetCategorys.filter(
+      (category) => category._id === id,
+    );
+    if (filterCategory) {
+      const [first] = filterCategory;
+      const filterBlogs = blogs.filter(
+        (blog) => blog.categories === first.title,
+      );
+      setCategorys(filterBlogs);
+    }
   };
 
   useEffect(() => {
     queryCategorys();
-  }, [history.location.search]);
+  }, [history.location.search, connetCategorys, blogs]);
 
   return (
     <div className={categoryStyle.category}>

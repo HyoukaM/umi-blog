@@ -3,12 +3,10 @@ import LayoutContext from '@/context/layoutContext';
 import { useHistory, connect } from 'umi';
 import MarkedRender from '@/components/markedRender/MarkedRender';
 import { BlogInterface } from '@/cloudbase-api/blogInterface';
-import query from '@/cloudbase-api/query';
 import articleStyle from '@/style/pages/article.less';
-import { BLOG_DATABASE, PUB_PATH } from '@/global/database';
-import { command } from '@/cloudbase-api/init-database';
 import { getQueryId } from '@/utils/reg';
 import { ReducerFC } from '@/global/global';
+import { filterArticle } from '@/utils';
 
 const Article: ReducerFC = (props) => {
   const { dispatch } = props;
@@ -45,16 +43,12 @@ const Article: ReducerFC = (props) => {
     if (!activeId) {
       return;
     }
-    query(BLOG_DATABASE, {
-      _id: command.eq(activeId),
-    }).then((res) => {
-      if (!res.length) {
-        history.push(PUB_PATH);
-        return;
-      }
-      setArticle(res[0]);
-    });
-  }, [activeId]);
+    if (filterArticle(blogs, activeId)) {
+      setArticle(filterArticle(blogs, activeId) as BlogInterface);
+    } else {
+      history.push('/');
+    }
+  }, [activeId, blogs]);
 
   useEffect(() => {
     dispatch({

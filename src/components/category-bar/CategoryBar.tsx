@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import query from '@/cloudbase-api/query';
+import React, { useContext, useEffect, useState } from 'react';
 import { CategoryType } from '@/cloudbase-api/blogInterface';
 import categoryBarStyle from '@/style/components/category-bar.less';
 import { useHistory } from 'umi';
 import { getQueryId } from '@/utils/reg';
+import LayoutContext from '@/context/layoutContext';
 
 interface CategoryBarProps {
   renderCategoryTitle?: boolean;
@@ -14,11 +14,7 @@ const CategoryBar: React.FC<CategoryBarProps> = (props) => {
   const [activeKey, setActiveKey] = useState<'/' | string>('/');
   const { renderCategoryTitle } = props;
   const history = useHistory();
-  const getCategory = () => {
-    query('categories', {}).then((res) => {
-      setCategoryList(res);
-    });
-  };
+  const { categorys } = useContext(LayoutContext);
 
   const categoryItemClick = (id: string) => {
     history.push(`/category?_id=${id}`);
@@ -42,8 +38,8 @@ const CategoryBar: React.FC<CategoryBarProps> = (props) => {
   };
 
   useEffect(() => {
-    getCategory();
-  }, []);
+    setCategoryList(categorys);
+  }, [categorys]);
 
   useEffect(() => {
     redirectPath();
