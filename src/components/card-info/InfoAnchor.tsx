@@ -10,58 +10,60 @@ const { Link } = Anchor;
 
 const InfoAnchor: ReducerFC<{
   blogs: BlogModelState;
-}> = (props) => {
-  const { blogs } = props;
-  const { currentContent } = blogs;
-  const [levelList, setLevelList] = useState<
-    { level: number; title: string; id: string }[]
-  >([]);
+}> = () => {
+  const [levelCache, setLevelCache] = useState<{
+    [key: string]: {
+      level: number;
+      id: string;
+    };
+  }>({});
+
   useEffect(() => {
-    setLevelList((levelList) => {
-      const toc = levelList;
-      renderMarker.heading = (text, level, raw, slugger) => {
-        if (renderMarker.options.headerIds) {
-          const id = renderMarker.options.headerPrefix + slugger.slug(raw);
-          toc.push({
-            level,
-            title: raw,
-            id,
-          });
-          return (
-            '<h' + level + ' id="' + id + '">' + text + '</h' + level + '>\n'
-          );
-        }
-        // ignore IDs
-        return '<h' + level + '>' + text + '</h' + level + '>\n';
-      };
-      return toc;
-    });
-  }, [currentContent]);
+    renderMarker.heading = (text, level, raw, slugger) => {
+      if (renderMarker.options.headerIds) {
+        const id = renderMarker.options.headerPrefix + slugger.slug(raw);
+        // @ts-ignore
+        levelCache[raw] = {
+          level,
+          id,
+        };
+        return (
+          '<h' + level + ' id="' + id + '">' + text + '</h' + level + '>\n'
+        );
+      }
+      // ignore IDs
+      return '<h' + level + '>' + text + '</h' + level + '>\n';
+    };
+    return () => {
+      setLevelCache({});
+    };
+  }, []);
 
   const linkScroll = (e: React.MouseEvent) => {
     e.preventDefault();
   };
 
-  if (!levelList.length) {
+  if (!Object.keys(levelCache).length) {
     return null;
   }
 
   return (
     <div className={cardInfo.infoAnchor}>
       <Anchor onClick={linkScroll} offsetTop={68} affix={false}>
-        {levelList.map((level, index) => {
+        {Object.keys(levelCache).map((level, index) => {
+          const cache = levelCache[level];
           return (
             <Link
-              href={`#${level.id}`}
+              href={`#${cache.id}`}
               key={index}
               className={
-                level.level === 1
+                cache.level === 1
                   ? cardInfo.anchorLevelOne
-                  : level.level === 2
+                  : cache.level === 2
                   ? cardInfo.anchorLevelTwo
                   : ''
               }
-              title={level.title}
+              title={level}
             />
           );
         })}
