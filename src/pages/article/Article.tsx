@@ -57,6 +57,15 @@ const Article: ReducerFC = (props) => {
     });
   }, [article]);
 
+  useEffect(() => {
+    return () => {
+      dispatch({
+        store: '',
+        type: 'blogs/effectContent',
+      });
+    };
+  }, []);
+
   if (!article) {
     return null;
   }

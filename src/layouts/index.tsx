@@ -105,7 +105,14 @@ const Index: ReducerFC<{
           >
             <BodyContent type={render} />
             <div className={`${layoutStyle.childrenBody}`}>
-              <div className={layoutStyle.content}>{children}</div>
+              <div
+                style={{
+                  width: renderCardInfo ? '75%' : '100%',
+                }}
+                className={layoutStyle.content}
+              >
+                {children}
+              </div>
               {renderCardInfo && (
                 <div className={layoutStyle.asideContent}>
                   <CardInfo />

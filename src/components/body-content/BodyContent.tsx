@@ -22,9 +22,6 @@ const ArticleBodyContent = () => {
     location: { search },
   } = history;
   useEffect(() => {
-    console.log(filterArticle(blogs, getQueryId(search)));
-    console.log(getQueryId(search));
-    console.log(blogs);
     setCurrentArticle(filterArticle(blogs, getQueryId(search)));
   }, [blogs]);
 
@@ -42,7 +39,6 @@ const ArticleBodyContent = () => {
     createDate,
     updateDate,
   } = currentArticle;
-  console.log(currentArticle);
   return (
     <div
       className={bodyContentStyle.articleContent}
