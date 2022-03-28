@@ -74,7 +74,7 @@
   border: 1px solid #e3e8f7;
   padding: 1.25rem 1.5rem;
   box-shadow: 0 5px 12px -5px rgba(102, 68, 68, 0);
-  margin-top: 0.625rem;
+  margin-top: 1.25rem;
 
   .infoCategoryList {
     span {
@@ -102,7 +102,7 @@
   border: 1px solid #e3e8f7;
   padding: 1.25rem 1.5rem;
   box-shadow: 0 5px 12px -5px rgba(102, 68, 68, 0);
-  margin-top: 0.625rem;
+  margin-top: 1.25rem;
   max-height: calc(100vh - 120px);
   overflow-y: scroll;
 
@@ -111,6 +111,7 @@
       margin: 0;
       padding: 0;
       max-height: unset !important;
+
       .ant-anchor {
         padding-left: 0;
 
@@ -167,7 +168,7 @@
   justify-content: center;
   cursor: pointer;
   background: #425aef;
-  margin-top: 0.625rem;
+  margin-top: 1.25rem;
   border-radius: 12px;
   overflow: hidden;
 
@@ -188,5 +189,23 @@
     img {
       transform: scale(1.05);
     }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .infoCategory,
+  .infoAnchor,
+  .infoLinks {
+    margin-top: 0.625rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .infoAnchor {
+    display: none;
+  }
+
+  .infoAboutMe {
+    margin-top: 1.25rem;
   }
 }

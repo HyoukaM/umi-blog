@@ -22,18 +22,50 @@
       justify-content: center;
 
       .content {
-        transition: margin-top 0.8s ease-in-out;
+        transition: all 0.3s ease-in-out;
       }
 
       .asideContent {
-        padding-left: 0.625rem;
-        max-width: 300px;
-        min-width: 300px;
+        width: 25%;
+        transition: all 0.1s;
       }
     }
 
     .footer {
       margin-top: 1.25rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .content {
+  }
+
+  .asideContent {
+    max-width: 300px;
+    min-width: 300px;
+    padding-left: 0.625rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .asideContent {
+    padding-left: 0.9375rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .childrenBody {
+    flex-direction: column;
+    padding: 0.625rem !important;
+
+    .content {
+      width: 100% !important;
+    }
+
+    .asideContent {
+      width: 100% !important;
+      max-width: 100% !important;
     }
   }
 }

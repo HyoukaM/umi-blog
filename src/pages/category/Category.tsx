@@ -46,8 +46,8 @@ const Category = () => {
                   {category.title}
                 </div>
                 <div className={categoryStyle.categoryItemTags}>
-                  {category.tags.map((tag) => {
-                    return <span>#{tag}</span>;
+                  {category.tags.map((tag, index) => {
+                    return <span key={index}>#{tag}</span>;
                   })}
                 </div>
               </div>
