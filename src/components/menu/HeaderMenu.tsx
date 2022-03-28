@@ -45,12 +45,7 @@ const HeaderMenu: React.FC = () => {
     setSubMenuActivePath(history.location.pathname);
   }, [history.location.pathname]);
 
-  return (
-    <div className={menuStyle.menu}>
-      {renderMenu(filterRouter)}
-      <div className={menuStyle.author}></div>
-    </div>
-  );
+  return <div className={menuStyle.menu}>{renderMenu(filterRouter)}</div>;
 };
 
 export default HeaderMenu;

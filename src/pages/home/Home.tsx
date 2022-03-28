@@ -75,6 +75,11 @@ const Home: React.FC = () => {
                       }-${new Date().getDate()}`}
                   </span>
                 </div>
+                <div className={homeStyle.tags}>
+                  {blog.tags.map((tag, index) => {
+                    return <span key={index}>#{tag}</span>;
+                  })}
+                </div>
               </div>
               <div className={homeStyle.cardAuthorPortrait}>
                 <img
@@ -105,6 +110,7 @@ const Home: React.FC = () => {
           pageSize={10}
           current={offset}
           total={blogs.length}
+          responsive={true}
           itemRender={(current, type, originalElement) => {
             if (type === 'prev') {
               return '上一页';

@@ -86,6 +86,10 @@
           margin: 0 0.2rem 0 0;
         }
       }
+
+      .tags {
+        display: none;
+      }
     }
 
     .cardAuthorPortrait {
@@ -146,6 +150,51 @@
     .card {
       margin-top: 0.625rem;
       margin-bottom: 0.625rem;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .card {
+      flex-direction: column-reverse;
+      height: unset;
+      margin-top: 0.625rem;
+      margin-bottom: 0.625rem;
+      .cardAuthorContent {
+        width: 100%;
+        height: 17.5rem;
+
+        .title {
+          .markedContext {
+            opacity: 1;
+            -webkit-line-clamp: 3;
+          }
+        }
+
+        .articleInfo {
+          display: none;
+        }
+
+        .tags {
+          display: block;
+          width: 100%;
+          bottom: 30px;
+          position: absolute;
+          padding: 0 20px;
+          font-size: 90%;
+
+          span {
+            font-weight: unset;
+            cursor: pointer;
+            color: #363636;
+            margin-right: 4px;
+            padding: 0 0.25rem;
+          }
+        }
+      }
+
+      .cardAuthorPortrait {
+        width: 100% !important;
+        height: 230px;
+      }
     }
   }
 }
