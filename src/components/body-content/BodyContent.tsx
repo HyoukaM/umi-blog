@@ -2,9 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import bodyContentStyle from '../../style/components/body-content.less';
 import { RenderBodyTypeStateEnum, RenderTypeState } from '@/models/renderType';
 import { useHistory } from 'umi';
-import query from '@/cloudbase-api/query';
-import { BLOG_DATABASE } from '@/global/database';
-import { command } from '@/cloudbase-api/init-database';
 import { getQueryId } from '@/utils/reg';
 import { BlogInterface } from '@/cloudbase-api/blogInterface';
 import LayoutContext from '@/context/layoutContext';
@@ -23,7 +20,7 @@ const ArticleBodyContent = () => {
   } = history;
   useEffect(() => {
     setCurrentArticle(filterArticle(blogs, getQueryId(search)));
-  }, [blogs]);
+  }, [blogs, history.location.search]);
 
   if (!currentArticle) {
     return null;
@@ -38,6 +35,7 @@ const ArticleBodyContent = () => {
     describeIcon,
     createDate,
     updateDate,
+    tags,
   } = currentArticle;
   return (
     <div
@@ -54,6 +52,11 @@ const ArticleBodyContent = () => {
           <span>
             <i className="fa fa-inbox" />
             <span>{categories ?? '无分类'}</span>
+            <span className={bodyContentStyle.tags}>
+              {tags.map((tag, index) => {
+                return <span key={index}>#{tag}</span>;
+              })}
+            </span>
           </span>
         </div>
         <h1>{title}</h1>

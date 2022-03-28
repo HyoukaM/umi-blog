@@ -1,0 +1,46 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  margin-top: 1.25rem;
+
+  > div {
+    background: #edf0f7;
+    display: flex;
+    height: 150px;
+    padding: 0 2.5rem;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: #b8b8b8;
+      color: white;
+    }
+
+    span:first-child {
+      font-size: 90%;
+    }
+
+    span:last-child {
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+  }
+
+  .prev {
+    flex: 1;
+    margin-right: 3px;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .next {
+    flex: 1;
+    margin-left: 3px;
+    align-items: flex-end;
+    border-radius: 0 12px 12px 0;
+  }
+
+  .paginationRadius {
+    border-radius: 12px;
+  }
+}

@@ -78,6 +78,7 @@ const Index: ReducerFC<{
     }
     if (
       type === RenderBodyTypeStateEnum.home ||
+      type === RenderBodyTypeStateEnum.article ||
       type === RenderBodyTypeStateEnum.category
     ) {
       setRenderCardInfo(true);

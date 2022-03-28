@@ -7,6 +7,8 @@ import articleStyle from '@/style/pages/article.less';
 import { getQueryId } from '@/utils/reg';
 import { ReducerFC } from '@/global/global';
 import { filterArticle } from '@/utils';
+import Pagination from '@/components/pagination/Pagination';
+import { scrollTop } from '@/utils/elementUtils';
 
 const Article: ReducerFC = (props) => {
   const { dispatch } = props;
@@ -37,7 +39,8 @@ const Article: ReducerFC = (props) => {
 
   useEffect(() => {
     redirectPath();
-  }, []);
+    scrollTop();
+  }, [history.location.pathname, history.location.search]);
 
   useEffect(() => {
     if (!activeId) {
@@ -45,8 +48,6 @@ const Article: ReducerFC = (props) => {
     }
     if (filterArticle(blogs, activeId)) {
       setArticle(filterArticle(blogs, activeId) as BlogInterface);
-    } else {
-      history.push('/');
     }
   }, [activeId, blogs]);
 
@@ -70,9 +71,22 @@ const Article: ReducerFC = (props) => {
     return null;
   }
 
+  const onPaginationChange = (
+    data: BlogInterface | undefined,
+    index: number,
+    datasource: BlogInterface[],
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    if (data) {
+      const { _id } = data;
+      if (_id) {
+        history.push(`/article?_id=${_id}`);
+      }
+    }
+  };
   return (
     <div className={articleStyle.article}>
-      <MarkedRender context={article?.content} />
+      <MarkedRender context={article?.content} dispatch={dispatch} />
       <div className={articleStyle.footer}>
         <div className={articleStyle.footerTitle}>
           <span className={articleStyle.original}>
@@ -88,6 +102,11 @@ const Article: ReducerFC = (props) => {
           协议，完整转载请注明来自 {article.author}
         </div>
       </div>
+      <Pagination
+        dataSource={blogs}
+        value={activeId}
+        onPageChange={onPaginationChange}
+      />
     </div>
   );
 };
