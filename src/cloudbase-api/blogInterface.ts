@@ -1,3 +1,6 @@
+/**
+ * 文章
+ */
 export interface BlogInterface {
   /**
    * 作者
@@ -54,6 +57,9 @@ export interface BlogInterface {
   _id: string;
 }
 
+/**
+ * 好文，友情推荐
+ */
 export interface GoodArticleType {
   _id: string;
   title?: string;
@@ -65,9 +71,68 @@ export interface GoodArticleType {
   authorImage: string;
 }
 
+/**
+ * 分类
+ */
 export interface CategoryType {
   title: string;
   _id: string;
+}
+
+/**
+ * 评论
+ */
+export interface Reply {
+  _id: string;
+  /**
+   * 归属ID
+   */
+  belong?: string;
+  /**
+   * 名称
+   */
+  name: string;
+  /**
+   * 点赞
+   */
+  like?: number;
+  /**
+   * 头像
+   */
+  avatar: string;
+  createDate: string;
+  /**
+   * 设备
+   */
+  equipment: string;
+  /**
+   * 浏览器版本
+   */
+  browser: string;
+  /**
+   * 回复
+   */
+  reply?: Array<Reply>;
+  /**
+   * 回复数
+   */
+  replyNumber?: number;
+  /**
+   * 内容
+   */
+  content: string;
+  /**
+   * 链接
+   */
+  link?: string;
+  /**
+   * 层级
+   */
+  level: number;
+  /**
+   * 父级ID
+   */
+  ascriptionId?: string;
 }
 
 export type BlogResponse = Array<BlogInterface>;

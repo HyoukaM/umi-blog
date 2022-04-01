@@ -13,7 +13,10 @@ import { RenderBodyTypeStateEnum, RenderTypeState } from '@/models/renderType';
 import '../style/index.less';
 import FooterBar from '@/components/footer/FooterBar';
 import query from '@/cloudbase-api/query';
-import { CATEGORY, GOOD_ARTICLE, LINKS } from '@/global/database';
+import { CATEGORY, GOOD_ARTICLE, LINKS, REPLY } from '@/global/database';
+import { recursion } from '@/utils';
+import { Reply } from '@/cloudbase-api/blogInterface';
+import db from '@/cloudbase-api/init-database';
 
 const Index: ReducerFC<{
   blogs: BlogModelState;
@@ -60,6 +63,16 @@ const Index: ReducerFC<{
     });
   };
 
+  const effectReply = (reply?: Reply[]) => {
+    if (reply && reply.length) {
+      dispatch({
+        type: 'blogs/effectReply',
+        store: reply,
+      });
+      return;
+    }
+  };
+
   useEffect(() => {
     scrollTop();
     dispatchType();
@@ -67,6 +80,17 @@ const Index: ReducerFC<{
 
   useEffect(() => {
     effectDispatch();
+    const watcher = db.collection(REPLY).watch({
+      onChange(res) {
+        const { docs } = res;
+        console.log(docs);
+        effectReply(docs as Reply[]);
+      },
+      onError() {},
+    });
+    return () => {
+      watcher.close();
+    };
   }, []);
 
   useEffect(() => {

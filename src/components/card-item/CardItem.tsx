@@ -3,6 +3,7 @@ import goodArticleStyle from '@/style/pages/goodArticle.less';
 import { RenderBodyTypeStateEnum } from '@/models/renderType';
 import { Card } from 'antd';
 import { GoodArticleType } from '@/cloudbase-api/blogInterface';
+import Comment from '@/components/comment/Comment';
 
 interface CardItem {
   type: string;
@@ -49,6 +50,7 @@ const CardItem: React.FC<CardItem> = (props) => {
           );
         })}
       </div>
+      <Comment />
     </div>
   );
 };

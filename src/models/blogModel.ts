@@ -4,7 +4,9 @@ import {
   BlogInterface,
   CategoryType,
   GoodArticleType,
+  Reply,
 } from '@/cloudbase-api/blogInterface';
+import { BLOG_DATABASE } from '@/global/database';
 
 export interface BlogModelState {
   blogs: Array<BlogInterface>;
@@ -12,6 +14,7 @@ export interface BlogModelState {
   categorys: CategoryType[];
   links: GoodArticleType[];
   articles: GoodArticleType[];
+  reply: Reply[];
 }
 
 export interface BlogModelType {
@@ -23,6 +26,7 @@ export interface BlogModelType {
     effectCategory: Effect;
     effectLinks: Effect;
     effectGoodArticles: Effect;
+    effectReply: Effect;
   };
   reducers: {
     reducerBlogs: ImmerReducer<BlogModelState>;
@@ -30,6 +34,7 @@ export interface BlogModelType {
     reducerCategory: ImmerReducer<BlogModelState>;
     reducerLinks: ImmerReducer<BlogModelState>;
     reducerGoodArticles: ImmerReducer<BlogModelState>;
+    reducerReply: ImmerReducer<BlogModelState>;
   };
 }
 
@@ -41,10 +46,11 @@ const blogModel: BlogModelType = {
     categorys: [],
     links: [],
     articles: [],
+    reply: [],
   },
   effects: {
     *effectBlogs({ store }, { put, call }) {
-      const result = yield call(query, 'blogs', {});
+      const result = yield call(query, BLOG_DATABASE, {});
       yield put({
         type: 'reducerBlogs',
         store: result,
@@ -71,6 +77,12 @@ const blogModel: BlogModelType = {
     *effectLinks({ store }, { put }) {
       yield put({
         type: 'reducerLinks',
+        store,
+      });
+    },
+    *effectReply({ store }, { put }) {
+      yield put({
+        type: 'reducerReply',
         store,
       });
     },
@@ -104,6 +116,12 @@ const blogModel: BlogModelType = {
       return {
         ...state,
         links: store,
+      };
+    },
+    reducerReply(state, { store }) {
+      return {
+        ...state,
+        reply: store,
       };
     },
   },
