@@ -77,9 +77,10 @@ const MarkedRender: React.FC<MarkedRenderProps> = (props) => {
     if (articleContainer.current) {
       const childNodes = articleContainer.current.childNodes;
       for (let i = 0; i < childNodes.length; i++) {
-        // @ts-ignore
         if (
+          // @ts-ignore
           childNodes[i].dataset &&
+          // @ts-ignore
           Object.keys(childNodes[i].dataset).length
         ) {
           // @ts-ignore
