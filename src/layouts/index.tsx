@@ -83,7 +83,6 @@ const Index: ReducerFC<{
     const watcher = db.collection(REPLY).watch({
       onChange(res) {
         const { docs } = res;
-        console.log(docs);
         effectReply(docs as Reply[]);
       },
       onError() {},
@@ -111,22 +110,22 @@ const Index: ReducerFC<{
 
   return (
     <>
-      <div className={layoutStyle.layout}>
-        <Header />
-        <div
-          style={{
-            marginTop: type === 'article' ? '0' : '60px',
-          }}
-          className={layoutStyle.body}
-        >
-          <LayoutContext.Provider
-            value={{
-              blogs: blogs.blogs,
-              type,
-              categorys: blogs.categorys,
-              articles: blogs.articles,
-              links: blogs.links,
+      <LayoutContext.Provider
+        value={{
+          blogs: blogs.blogs,
+          type,
+          categorys: blogs.categorys,
+          articles: blogs.articles,
+          links: blogs.links,
+        }}
+      >
+        <div className={layoutStyle.layout}>
+          <Header />
+          <div
+            style={{
+              marginTop: type === 'article' ? '0' : '60px',
             }}
+            className={layoutStyle.body}
           >
             <BodyContent type={render} />
             <div className={`${layoutStyle.childrenBody}`}>
@@ -144,14 +143,13 @@ const Index: ReducerFC<{
                 </div>
               )}
             </div>
-          </LayoutContext.Provider>
-
-          <div className={layoutStyle.footer}>
-            <AboutMe />
-            <FooterBar />
+            <div className={layoutStyle.footer}>
+              <AboutMe />
+              <FooterBar />
+            </div>
           </div>
         </div>
-      </div>
+      </LayoutContext.Provider>
     </>
   );
 };

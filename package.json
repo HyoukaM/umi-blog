@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-layout": "^6.5.0",
     "@cloudbase/js-sdk": "^1.7.2",
     "react": "17.x",

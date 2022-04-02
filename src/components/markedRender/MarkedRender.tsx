@@ -7,7 +7,7 @@ import { renderMarker } from '@/utils/reg';
 import { Dispatch } from 'umi';
 
 interface MarkedRenderProps {
-  dispatch: Dispatch;
+  dispatch?: Dispatch;
   configure?: Partial<HLJSOptions>;
   markedOptions?: marked.MarkedOptions;
   context?: string;
@@ -15,7 +15,7 @@ interface MarkedRenderProps {
 
 const defaultConfigure = {
   classPrefix: 'hljs-',
-  languages: [ 'CSS', 'HTML', 'JavaScript', 'Python', 'TypeScript', 'Markdown' ],
+  languages: ['CSS', 'HTML', 'JavaScript', 'Python', 'TypeScript', 'Markdown'],
 };
 const defaultOptions: marked.MarkedOptions = {
   renderer: renderMarker,
@@ -76,9 +76,12 @@ const MarkedRender: React.FC<MarkedRenderProps> = (props) => {
     const cache = {};
     if (articleContainer.current) {
       const childNodes = articleContainer.current.childNodes;
-      for (let i = 0; i < childNodes.length; i ++) {
+      for (let i = 0; i < childNodes.length; i++) {
         // @ts-ignore
-        if (childNodes[i].dataset && Object.keys(childNodes[i].dataset).length) {
+        if (
+          childNodes[i].dataset &&
+          Object.keys(childNodes[i].dataset).length
+        ) {
           // @ts-ignore
           const { level, id, title } = childNodes[i].dataset;
           // @ts-ignore
@@ -90,11 +93,12 @@ const MarkedRender: React.FC<MarkedRenderProps> = (props) => {
         }
       }
     }
-    dispatch({
-      type: 'toc/effectToc',
-      store: cache,
-    });
-  }, [ articleContainer.current, context ]);
+    dispatch &&
+      dispatch({
+        type: 'toc/effectToc',
+        store: cache,
+      });
+  }, [articleContainer.current, context]);
 
   return (
     <div
@@ -102,7 +106,7 @@ const MarkedRender: React.FC<MarkedRenderProps> = (props) => {
       id="articleContainer"
       ref={(ref) => (articleContainer.current = ref)}
       dangerouslySetInnerHTML={{
-        __html: marked(context).replace(/<pre>/g, '<pre id=\'hljs\'>'),
+        __html: marked(context).replace(/<pre>/g, "<pre id='hljs'>"),
       }}
     />
   );

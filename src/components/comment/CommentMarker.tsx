@@ -3,6 +3,7 @@ import commentStyle from '@/style/components/comment.less';
 import { Reply } from '@/cloudbase-api/blogInterface';
 import { marked } from 'marked';
 import CommentReply from '@/components/comment/CommentReply';
+import moment from 'moment';
 
 interface CommentMarkerProps {
   reply?: Reply[];
@@ -29,6 +30,7 @@ const RenderReply: React.FC<
 > = (props) => {
   const { reply, onSubmitLike, onSubmitReply } = props;
   const [replyVisible, setReplyVisible] = useState<boolean>(false);
+  // const momentDate = moment([new Date().getFullYear(), new Date().getMonth(), new Date().getDate()])
   return (
     <div className={commentStyle.commentContent}>
       <div className={commentStyle.avatar}>

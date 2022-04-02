@@ -20,7 +20,7 @@ const InfoAboutMe = () => {
       <div className={cardInfo.hello}>👋👋{currentTime()}好！我是</div>
       <div className={cardInfo.author}>诸观涛</div>
       <div className={cardInfo.info}>
-        这有关于<b>产品、设计、开发</b>相关的问题和看法，还有文章翻译和分享。
+        这有关于<b>前端、算法、后端</b>相关的问题和看法，还有摸鱼滚打和分享。
       </div>
       <div className={cardInfo.info}>
         <span className={cardInfo.margin}>

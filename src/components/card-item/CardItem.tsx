@@ -4,9 +4,11 @@ import { RenderBodyTypeStateEnum } from '@/models/renderType';
 import { Card } from 'antd';
 import { GoodArticleType } from '@/cloudbase-api/blogInterface';
 import Comment from '@/components/comment/Comment';
+import GoodArticleCollapse from '@/components/good-article-collapse/GoodArticleCollapse';
+import LinksCollapse from '@/components/links-collapse/LinksCollapse';
 
 interface CardItem {
-  type: string;
+  type: RenderBodyTypeStateEnum;
   maps: GoodArticleType[];
 }
 
@@ -50,6 +52,8 @@ const CardItem: React.FC<CardItem> = (props) => {
           );
         })}
       </div>
+      {type === RenderBodyTypeStateEnum.goodArticle && <GoodArticleCollapse />}
+      {type === RenderBodyTypeStateEnum.links && <LinksCollapse />}
       <Comment />
     </div>
   );

@@ -30,7 +30,7 @@ const CommentReply: React.FC<CommentReplyProps> = (props) => {
   };
 
   const onSubmit = () => {
-    if (!replyUserName || !replyUserAvatar || !replyUserContent) {
+    if (!replyUserName || !replyUserContent) {
       message.warn('请填入必填项');
       return;
     }

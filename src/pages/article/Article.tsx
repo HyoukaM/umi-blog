@@ -22,19 +22,9 @@ const Article: ReducerFC = (props) => {
    */
   const redirectPath = () => {
     const {
-      location: { search, pathname },
+      location: { search },
     } = history;
-    let id;
-    if (!search) {
-      const [first] = blogs;
-      const { _id } = first;
-      id = _id;
-      setActiveId(_id);
-      history.push(`${pathname}?_id=${_id}`);
-    } else {
-      id = getQueryId(search);
-    }
-    setActiveId(id);
+    setActiveId(getQueryId(search));
   };
 
   useEffect(() => {
@@ -71,12 +61,7 @@ const Article: ReducerFC = (props) => {
     return null;
   }
 
-  const onPaginationChange = (
-    data: BlogInterface | undefined,
-    index: number,
-    datasource: BlogInterface[],
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
+  const onPaginationChange = (data: BlogInterface | undefined) => {
     if (data) {
       const { _id } = data;
       if (_id) {

@@ -41,7 +41,14 @@ const Comment: ReducerFC<{
       }
     }
   };
-
+  /**
+   * 回复
+   * @param name
+   * @param qq
+   * @param content
+   * @param id
+   * @param reply
+   */
   const onSubmitReply = (
     name: string,
     qq: string,
@@ -51,7 +58,7 @@ const Comment: ReducerFC<{
   ) => {
     const { level } = reply;
     let ascriptionId, avatar;
-    const createData = moment().format('YYYY-MM-DD');
+    const createDate = moment().format('YYYY-MM-DD');
     if (level === 2) {
       ascriptionId = findParent(id)?._id;
     }
@@ -71,7 +78,7 @@ const Comment: ReducerFC<{
       name,
       content,
       belong: type,
-      createData,
+      createDate,
     };
     update(REPLY, findParent(id)?._id ?? '', {
       replyNumber: findParent(id)?.reply
@@ -80,16 +87,25 @@ const Comment: ReducerFC<{
     });
     add(REPLY, replyData);
   };
-
+  /**
+   * 点赞
+   * @param id
+   * @param reply
+   */
   const onSubmitLike = (id: string, reply: Reply) => {
     const responseReply = Object.assign({}, reply);
     responseReply.like = (responseReply.like ?? 0) + 1;
     const { like } = responseReply;
     update(REPLY, id, { like });
   };
-
+  /**
+   * 首次回复
+   * @param name
+   * @param qq
+   * @param content
+   */
   const onReply = (name: string, qq: string, content: string) => {
-    const createData = moment().format('YYYY-MM-DD');
+    const createDate = moment().format('YYYY-MM-DD');
     let avatar;
     if (!!qq) {
       avatar = `https://q1.qlogo.cn/g?b=qq&nk=${qq}&s=640`;
@@ -99,7 +115,7 @@ const Comment: ReducerFC<{
     }
     const replyData = {
       name,
-      createData,
+      createDate,
       avatar,
       content,
       level: 1,
@@ -113,7 +129,7 @@ const Comment: ReducerFC<{
     if (reply && reply.length) {
       setRecursionReply(recursion(reply.filter((i) => i.belong === type)));
     }
-  }, [reply]);
+  }, [reply, type]);
 
   return (
     <div className={commentStyle.comment}>
