@@ -56,6 +56,10 @@ const Comment: ReducerFC<{
     id: string,
     reply: Reply,
   ) => {
+    // @ts-ignore
+    const returnCitySN = window['returnCitySN'];
+    const cip = returnCitySN['cip'];
+    const cname = returnCitySN['cname'];
     const { level } = reply;
     let ascriptionId, avatar;
     const createDate = moment().format('YYYY-MM-DD');
@@ -79,6 +83,8 @@ const Comment: ReducerFC<{
       content,
       belong: type,
       createDate,
+      cip,
+      cname,
     };
     update(REPLY, findParent(id)?._id ?? '', {
       replyNumber: findParent(id)?.reply
@@ -106,6 +112,10 @@ const Comment: ReducerFC<{
    */
   const onReply = (name: string, qq: string, content: string) => {
     const createDate = moment().format('YYYY-MM-DD');
+    // @ts-ignore
+    const returnCitySN = window['returnCitySN'];
+    const cip = returnCitySN['cip'];
+    const cname = returnCitySN['cname'];
     let avatar;
     if (!!qq) {
       avatar = `https://q1.qlogo.cn/g?b=qq&nk=${qq}&s=640`;
@@ -120,6 +130,8 @@ const Comment: ReducerFC<{
       content,
       level: 1,
       belong: type,
+      cip,
+      cname,
     };
     add(REPLY, replyData);
     message.success('回复成功');

@@ -25,4 +25,5 @@ export default defineConfig({
   history: {
     type: 'hash',
   },
+  scripts: ['https://pv.sohu.com/cityjson?ie=utf-8'],
 });

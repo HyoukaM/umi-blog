@@ -133,6 +133,8 @@ export interface Reply {
    * 父级ID
    */
   ascriptionId?: string;
+  cip?: string;
+  cname?: string;
 }
 
 export type BlogResponse = Array<BlogInterface>;
