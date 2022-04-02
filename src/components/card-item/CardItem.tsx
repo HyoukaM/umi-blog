@@ -30,12 +30,9 @@ const CardItem: React.FC<CardItem> = (props) => {
               {goodArticle.recommend && (
                 <span className={goodArticleStyle.recommend}>推荐</span>
               )}
-              <div
-                style={{
-                  backgroundImage: `url(${goodArticle.backgroundImage})`,
-                }}
-                className={goodArticleStyle.backgroundImage}
-              />
+              <div className={goodArticleStyle.backgroundImage}>
+                <img src={goodArticle.backgroundImage} alt="背景图片" />
+              </div>
               <div className={goodArticleStyle.title}>
                 <div
                   style={{
