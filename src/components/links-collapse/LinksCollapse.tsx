@@ -25,7 +25,7 @@ const LinksCollapse = () => {
           }
         />
       </Panel>
-      <Panel header="友链实例" key="2">
+      <Panel header="友链示例" key="2">
         <MarkedRender
           context={
             '+ `author`: hyouka\n+ `authorImage`: https://hyouka-3gvi14m1c09e066d-1257119522.tcloudbaseapp.com/app/static/favicon.3ef433a4.svg\n+ `link_`: https://hyouka-3gvi14m1c09e066d-1257119522.tcloudbaseapp.com/app#/\n+ `backgorundImage`: https://hyouka-3gvi14m1c09e066d-1257119522.tcloudbaseapp.com/app/static/favicon.3ef433a4.svg\n+ `describe`: hyouka的个人博客\n'

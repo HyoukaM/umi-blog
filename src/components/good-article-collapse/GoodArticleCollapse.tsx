@@ -28,7 +28,7 @@ const GoodArticleCollapse = () => {
       <Panel header="好文示例" key="2">
         <MarkedRender
           context={
-            '+ `title`: vue文档\n+ `link_`: https://v3.cn.vuejs.org/\n+ `backgorundImage`: https://v3.cn.vuejs.org/logo.png\n+ `describe`: vue3中文文档\n'
+            '+ `title`: vue文档\n+ `link_`: https://v3.cn.vuejs.org/\n+ `backgorundImage`: https://v3.cn.vuejs.org/logo.png\n+ `describe`: vue3中文文档\n+ `authorImage`: http://alexwjj.github.io/img/logo.png\n'
           }
         />
       </Panel>
