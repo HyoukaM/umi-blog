@@ -6,6 +6,7 @@ import { getQueryId } from '@/utils/reg';
 import { BlogInterface } from '@/cloudbase-api/blogInterface';
 import LayoutContext from '@/context/layoutContext';
 import { filterArticle } from '@/utils';
+import { ImgMainColor } from '@/utils/extractColor.js';
 
 interface BodyContentProps {
   type?: RenderTypeState;
@@ -14,6 +15,7 @@ interface BodyContentProps {
 const ArticleBodyContent = () => {
   const [currentArticle, setCurrentArticle] = useState<BlogInterface>();
   const { blogs } = useContext(LayoutContext);
+  const [backgroundColor, setBackgroundColor] = useState<string>('');
   const history = useHistory();
   const {
     location: { search },
@@ -38,14 +40,13 @@ const ArticleBodyContent = () => {
     tags,
   } = currentArticle;
   return (
-    <div
-      className={bodyContentStyle.articleContent}
-      style={{
-        backgroundImage: `url(${
-          portrait ?? 'https://api.ixiaowai.cn/gqapi/gqapi.php'
-        })`,
-      }}
-    >
+    <div className={bodyContentStyle.articleContent}>
+      <div className={bodyContentStyle.articleContentImage}>
+        <img
+          src={portrait ?? 'https://api.ixiaowai.cn/gqapi/gqapi.php'}
+          alt="背景图"
+        />
+      </div>
       <div className={bodyContentStyle.articleContentInfo}>
         <div className={bodyContentStyle.firstInfo}>
           <span>{original ? '原创' : '转载'}</span>
