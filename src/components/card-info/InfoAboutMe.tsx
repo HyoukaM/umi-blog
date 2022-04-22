@@ -28,7 +28,7 @@ const InfoAboutMe = () => {
         </span>
       </div>
       <div className={cardInfo.links}>
-        <span>
+        <span onClick={() => window.open('https://github.com/HyoukaM')}>
           <i className="iconfont icon-github" />
         </span>
       </div>

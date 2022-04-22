@@ -28,6 +28,10 @@ const Category = () => {
     }
   };
 
+  const pushHistoryLocation = (id: string) => {
+    history.push(`/article?_id=${id}`);
+  };
+
   useEffect(() => {
     queryCategorys();
   }, [history.location.search, connetCategorys, blogs]);
@@ -39,7 +43,11 @@ const Category = () => {
         {!categorys.length && <div>暂无数据</div>}
         {categorys.map((category) => {
           return (
-            <div key={category._id} className={categoryStyle.categoryItem}>
+            <div
+              onClick={() => pushHistoryLocation(category._id)}
+              key={category._id}
+              className={categoryStyle.categoryItem}
+            >
               <img src={category.portrait} alt="背景图" />
               <div>
                 <div className={categoryStyle.categoryItemTitle}>

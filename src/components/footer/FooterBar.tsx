@@ -45,6 +45,7 @@ const FooterBar = () => {
     <div className={footerStyle.footerBar}>
       <div className={footerStyle.footerTitle}>{title}</div>
       <div className={footerStyle.footerInfo}>
+        <span>浙ICP备2022011566号-1</span>
         <span>关于</span>
       </div>
     </div>
